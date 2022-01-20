@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./preview.jpg) <!-- TODO: Update this to my "./screenshot.jpg" after finishing this project -->
 
 ### Links
 
