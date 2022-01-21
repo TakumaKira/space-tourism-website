@@ -21,6 +21,10 @@ This is a solution to the [Space tourism website challenge on Frontend Mentor](h
   - [Getting Started](#getting-started)
   - [Learn More](#learn-more)
   - [Deploy on Vercel](#deploy-on-vercel)
+- [Additional commands for development](#additional-commands-for-development)
+  - [Component Driven Development](#component-driven-development)
+  - [Unit testing](#unit-testing)
+  - [E2E testing](#e2e-testing)
 
 ## Overview
 
@@ -57,6 +61,8 @@ Users should be able to:
 ### Continued development
 
 ### Useful resources
+
+- [Unit testing Next.js API routes](https://seanconnolly.dev/unit-testing-nextjs-api-routes) - This told me the easiest way to test Next.js API.
 
 ## Author
 
@@ -101,3 +107,39 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# Additional commands for development
+
+## Component Driven Development
+
+First, run the development server:
+
+```bash
+yarn storybook
+```
+
+Open [http://localhost:6006](http://localhost:6006) with your browser to see the result.
+
+## Unit testing
+
+Run the tests with:
+
+```bash
+yarn test
+```
+
+You will see the results in the terminal.
+
+## E2E testing
+
+Run E2E tests with:
+
+```bash
+yarn cypress
+```
+
+Or, headlessly:
+
+```bash
+yarn cypress:headless
+```
