@@ -2,7 +2,6 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Barlow Condensed', sans-serif;
   font-family: 'Bellefair', serif;
 }
 
@@ -13,4 +12,8 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.font-secondary {
+  font-family: 'Barlow Condensed', sans-serif;
 }
