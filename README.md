@@ -131,3 +131,15 @@ yarn test
 You will see the results in the terminal.
 
 ## E2E testing
+
+Run E2E tests with:
+
+```bash
+yarn cypress
+```
+
+Or, headlessly:
+
+```bash
+yarn cypress:headless
+```
