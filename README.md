@@ -63,6 +63,7 @@ Users should be able to:
 ### Useful resources
 
 - [Unit testing Next.js API routes](https://seanconnolly.dev/unit-testing-nextjs-api-routes) - This told me the easiest way to test Next.js API.
+- [What are the best screen sizes for responsive web design in 2022?](https://www.hobo-web.co.uk/best-screen-size/) - Referencing this page, I set responsive break point width.
 
 ## Author
 

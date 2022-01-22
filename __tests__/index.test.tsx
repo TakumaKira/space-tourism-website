@@ -5,7 +5,7 @@ import config from '../config.json'
 import Home, { Main } from '../pages'
 
 const {
-  responsiveSwitchWidth: {
+  responsiveBreakPointWidth: {
     desktopToTablet,
     tabletToMobile,
   },
