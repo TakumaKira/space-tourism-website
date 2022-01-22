@@ -1,22 +1,34 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import config from '../config.json'
-import styled from 'styled-components'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import styled from 'styled-components';
+import config from '../config.json';
+
+const {
+  responsiveSwitchWidth: {
+    desktopToTablet,
+    tabletToMobile,
+  },
+  resourcePath: {
+    HOME_BACKGROUND_DESKTOP: bgDesktop,
+    HOME_BACKGROUND_TABLET: bgTablet,
+    HOME_BACKGROUND_MOBILE: bgMobile,
+  },
+} = config;
 
 export const Main = styled.main`
   min-height: 100vh;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  color: red;
-  @media (max-width: 640px) {
-    &:hover {
-      color: green;
-    }
+  @media (max-width: ${tabletToMobile}px) {
+    background-image: url(${bgMobile});
   }
+  @media (min-width: ${tabletToMobile}px) {
+    background-image: url(${bgTablet});
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    background-image: url(${bgDesktop});
+  }
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
 const Home: NextPage = () => {

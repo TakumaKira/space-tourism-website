@@ -1,4 +1,4 @@
-import * as NextImage from "next/image";
+import * as NextImage from 'next/image';
 import '../styles/globals.css';
 
 export const parameters = {
@@ -19,6 +19,7 @@ export const parameters = {
     ],
   },
   viewport: {
+    defaultViewport: 'desktop',
     viewports: {
       desktop: {
         name: 'Desktop',
