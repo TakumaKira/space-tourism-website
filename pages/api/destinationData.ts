@@ -54,10 +54,10 @@ const titan: Destination = {
 }
 
 export type Destinations = {
-  [key: string]: Destination
-}
+  [key: string]: Destination,
+};
 
-export const destinations: Destinations = {
+export const destination: Destinations = {
   moon,
   mars,
   europa,
