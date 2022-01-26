@@ -1,6 +1,6 @@
 import { createMocks } from 'node-mocks-http';
-import { data } from '../../pages/api/data';
-import handler, { error404 } from '../../pages/api/[...slug]';
+import { data } from '../../../pages/api/data';
+import handler, { error404 } from '../../../pages/api/[...slug]';
 
 test('returns data if passed existing path', async () => {
   const path1 = 'destinations'

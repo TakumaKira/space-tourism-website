@@ -1,6 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import React from 'react';
 import styled from 'styled-components';
+import Navigation from '../components/Navigation';
 import config from '../config.json';
 
 const {
@@ -16,6 +18,7 @@ const {
 } = config;
 
 export const Main = styled.main`
+  display: flex;
   min-height: 100vh;
   @media (max-width: ${tabletToMobile}px) {
     background-image: url(${bgMobile});
@@ -32,6 +35,8 @@ export const Main = styled.main`
 `;
 
 const Home: NextPage = () => {
+  const [selected, setSelected] = React.useState(0);
+
   return (
     <div>
       <Head>
@@ -40,7 +45,10 @@ const Home: NextPage = () => {
       </Head>
 
       <Main>
-        Font test
+        <Navigation
+          selected={selected}
+          handleSelected={setSelected}
+        />
       </Main>
     </div>
   )

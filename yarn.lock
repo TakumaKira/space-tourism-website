@@ -1609,6 +1609,11 @@
   dependencies:
     glob "7.1.7"
 
+"@next/plugin-storybook@^12.0.8":
+  version "12.0.8"
+  resolved "https://registry.yarnpkg.com/@next/plugin-storybook/-/plugin-storybook-12.0.8.tgz#91fe7736299bbd412884590d258346da0d408c45"
+  integrity sha512-580/EqNMX7bRZYqcQ6d4A3ueE/Qj3+XMBLpao8IqJH22DjvFVX39sVofAQpCG4YoU2fEuSQtRSIgrudNB4j8Kg==
+
 "@next/react-refresh-utils@12.0.8":
   version "12.0.8"
   resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-12.0.8.tgz#481760a95ef442abd091663db6582d4dc1b31f06"

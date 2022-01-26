@@ -1,5 +1,14 @@
 import * as NextImage from 'next/image';
+import config from '../config.json';
 import '../styles/globals.css';
+
+const {
+  resourcePath: {
+    HOME_BACKGROUND_DESKTOP: bgDesktop,
+    HOME_BACKGROUND_TABLET: bgTablet,
+    HOME_BACKGROUND_MOBILE: bgMobile,
+  },
+} = config;
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -8,15 +17,6 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
-  },
-  backgrounds: {
-    default: 'black',
-    values: [
-      {
-        name: 'black',
-        value: '#000000',
-      },
-    ],
   },
   viewport: {
     defaultViewport: 'desktop',

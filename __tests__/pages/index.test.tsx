@@ -1,8 +1,7 @@
-import { render, screen } from '@testing-library/react'
 import 'jest-styled-components'
 import renderer from 'react-test-renderer'
-import config from '../config.json'
-import Home, { Main } from '../pages'
+import config from '../../config.json'
+import { Main } from '../../pages'
 
 const {
   responsiveBreakPointWidth: {
@@ -16,13 +15,8 @@ const {
   },
 } = config;
 
+// TODO: Refine test after clarifying how this component works with other components.
 describe('Home', () => {
-  it('renders font test', () => {
-    render(<Home />)
-    const heading = screen.getByText('Font test')
-    expect(heading).toBeInTheDocument()
-  })
-
   it('have styles added by styled-components', () => {
     const main = renderer.create(<Main />).toJSON()
     expect(main).toHaveStyleRule('min-height', '100vh')
