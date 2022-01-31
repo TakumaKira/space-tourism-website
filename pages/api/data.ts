@@ -1,13 +1,12 @@
 import { crew, Crews } from './crewData'
-import { Destinations, destinations } from './destinationsData'
+import { destination, Destinations } from './destinationData'
 import { Technologies, technology } from './technologyData'
 
 export type Data = {
   [key: string]: Destinations | Crews | Technologies,
 }
-
 export const data: Data = {
-  destinations,
+  destination,
   crew,
   technology,
 }

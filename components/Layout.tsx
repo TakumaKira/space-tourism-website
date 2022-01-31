@@ -1,0 +1,56 @@
+import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import React from 'react'
+import styled from 'styled-components'
+import config from '../config.json'
+import Navigation from './Navigation'
+
+const {
+  responsiveBreakPointWidth: {
+    desktopToTablet,
+    tabletToMobile,
+  },
+} = config
+
+const resourcePath = config.resourcePath as StringKeyObject<string>
+
+export const Background = styled.div<{path: string}>`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  @media (max-width: ${tabletToMobile}px) {
+    background-image: ${({path}) => {
+      return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_MOBILE`]})`
+    }}
+  }
+  @media (min-width: ${tabletToMobile}px) {
+    background-image: ${({path}) => {
+      return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_TABLET`]})`
+    }}
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    background-image: ${({path}) => {
+      return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_DESKTOP`]})`
+    }}
+  }
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+`;
+
+interface Props {
+  children: JSX.Element,
+}
+const Layout: NextPage<Props> = ({children}) => {
+  const router = useRouter()
+  const path = router.pathname.split('/')[1]
+
+  return (
+    <Background path={path}>
+      <Navigation />
+      <main>{children}</main>
+    </Background>
+  );
+}
+
+export default Layout

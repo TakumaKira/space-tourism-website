@@ -2,6 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background-color: #0b0d18;
+  color: #FFFFFF;
   font-family: 'Bellefair', serif;
 }
 
@@ -12,6 +14,13 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+ol {
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
 }
 
 .font-secondary {

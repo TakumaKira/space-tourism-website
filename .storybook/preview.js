@@ -1,5 +1,6 @@
-import * as NextImage from "next/image";
+import * as NextImage from 'next/image';
 import '../styles/globals.css';
+import { RouterContext } from "next/dist/shared/lib/router-context"; // next 12
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,16 +10,11 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  backgrounds: {
-    default: 'black',
-    values: [
-      {
-        name: 'black',
-        value: '#000000',
-      },
-    ],
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
   viewport: {
+    defaultViewport: 'desktop',
     viewports: {
       desktop: {
         name: 'Desktop',
