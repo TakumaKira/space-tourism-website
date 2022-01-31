@@ -1,5 +1,5 @@
 import { crew, Crews } from './crewData'
-import { Destinations, destination } from './destinationData'
+import { destination, Destinations } from './destinationData'
 import { Technologies, technology } from './technologyData'
 
 export type Data = {

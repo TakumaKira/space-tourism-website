@@ -1,123 +1,41 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { useRouter } from 'next/router';
 import React from 'react';
+import { Background } from '../../components/Layout';
 import Navigation from '../../components/Navigation';
-import config from '../../config.json';
-
-const {
-  resourcePath: {
-    HOME_BACKGROUND_DESKTOP: bgDesktop,
-    HOME_BACKGROUND_TABLET: bgTablet,
-    HOME_BACKGROUND_MOBILE: bgMobile,
-  },
-} = config;
 
 export default {
   title: 'Components/Navigation',
   component: Navigation,
-  parameters: {
-    backgrounds: {
-      default: 'Desktop',
-      values: [
-        {
-          name: 'Desktop',
-          value: `url(${bgDesktop})`,
-        },
-        {
-          name: 'Tablet',
-          value: `url(${bgTablet})`,
-        },
-        {
-          name: 'Mobile',
-          value: `url(${bgMobile})`,
-        },
-      ],
-    },
-    layout: 'fullscreen',
-  },
 } as ComponentMeta<typeof Navigation>;
 
 const Template: ComponentStory<typeof Navigation> = (args) => {
-  const [selected, setSelected] = React.useState(0);
+  const router = useRouter()
+  const path = router.pathname.split('/')[1]
+
   return (
-    <div style={{display: 'flex', height: '100vh'}}>
-      <Navigation {...args} selected={selected} handleSelected={setSelected} />
-    </div>
+    <Background path={path}>
+      <Navigation {...args} />
+    </Background>
   );
 };
 
-export const Default = Template.bind({});
-
-export const Desktop = Template.bind({});
-Desktop.parameters = {
-  backgrounds: {
-    default: 'Desktop',
-    values: [
-      {
-        name: 'Desktop',
-        value: `url(${bgDesktop})`,
-      },
-    ],
+export const Home = Template.bind({});
+export const Destination = Template.bind({});
+Destination.parameters = {
+  nextRouter: {
+    pathname: '/destination/[name]'
   },
-  viewport: {
-    defaultViewport: 'desktop',
-    viewports: {
-      desktop: {
-        name: 'Desktop',
-        styles: {
-          width: '1440px',
-          height: '900px',
-        },
-      },
-    },
+}
+export const Crew = Template.bind({});
+Crew.parameters = {
+  nextRouter: {
+    pathname: '/crew/[name]'
   },
-};
-
-export const Tablet = Template.bind({});
-Tablet.parameters = {
-  backgrounds: {
-    default: 'Tablet',
-    values: [
-      {
-        name: 'Tablet',
-        value: `url(${bgTablet})`,
-      },
-    ],
+}
+export const Technology = Template.bind({});
+Technology.parameters = {
+  nextRouter: {
+    pathname: '/technology/[name]'
   },
-  viewport: {
-    defaultViewport: 'tablet',
-    viewports: {
-      tablet: {
-        name: 'Tablet',
-        styles: {
-          width: '768px',
-          height: '1024px',
-        },
-      },
-    },
-  },
-};
-
-export const Mobile = Template.bind({});
-Mobile.parameters = {
-  backgrounds: {
-    default: 'Mobile',
-    values: [
-      {
-        name: 'Mobile',
-        value: `url(${bgMobile})`,
-      },
-    ],
-  },
-  viewport: {
-    defaultViewport: 'mobile',
-    viewports: {
-      mobile: {
-        name: 'Mobile',
-        styles: {
-          width: '375px',
-          height: '667px',
-        },
-      },
-    },
-  },
-};
+}

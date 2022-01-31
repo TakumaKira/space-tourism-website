@@ -1,4 +1,7 @@
+import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import config from '../config.json';
@@ -60,7 +63,7 @@ const Line = styled.div`
   }
 `;
 
-const Checkbox = styled.input.attrs(props => ({
+const HiddenCheckbox = styled.input.attrs(props => ({
   type: 'checkbox',
   id: 'hamburger'
 }))`
@@ -139,7 +142,7 @@ const BlurBox = styled.div<{isOpen: boolean}>`
   perspective: 1000;
 `;
 
-const Items = styled.ol`
+const NavItems = styled.ol`
   display: flex;
   @media (max-width: ${tabletToMobile}px) {
     flex-direction: column;
@@ -239,6 +242,16 @@ const Texts = styled.div`
   @media (max-width: ${tabletToMobile}px) {
     margin-left: 32px;
   }
+  @media (min-width: ${tabletToMobile}px) {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const Number = styled.span<{spaceBetween: number}>`
@@ -255,48 +268,52 @@ const Number = styled.span<{spaceBetween: number}>`
   }
 `;
 
-type ItemPropType = {
+interface ItemProps {
   number: string,
   name: string,
+  href: string,
   spaceBetween: number,
-  isSelected: boolean,
-  onClick: () => void,
 }
-const Item = (props: ItemPropType) => {
+const NavItem: NextPage<ItemProps> = (props: ItemProps) => {
+  const router = useRouter()
+  const path = router.pathname.split('/')[1]
+
   const {
     number,
     name,
+    href,
     spaceBetween,
-    isSelected,
-    onClick,
-  } = props;
+  } = props
 
   return (
-    <ItemContainer className={isSelected ? 'selected' : ''} onClick={onClick}>
-      <Texts>
-        <Number spaceBetween={spaceBetween}>{number}</Number>
-        <span>{name}</span>
-      </Texts>
+    <ItemContainer className={`/${path}` === href ? 'selected' : ''}>
+      <Link href={href}>
+        <Texts>
+          <Number spaceBetween={spaceBetween}>{number}</Number>
+          <span>{name}</span>
+        </Texts>
+      </Link>
     </ItemContainer>
-  );
+  )
 }
 
-type PropType = {
-  selected: number,
-  handleSelected: (selected: number) => void,
+interface Props {
   className?: string,
   style?: React.CSSProperties,
 }
-
-const Navigation = (props: PropType) => {
+const Navigation: NextPage<Props> = (props: Props) => {
   const {
-    selected,
-    handleSelected,
     className,
     style,
-  } = props;
+  } = props
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false)
+  const router = useRouter()
+  const path = router.pathname.split('/')[1]
+
+  React.useEffect(() => {
+    setTimeout(() => setIsOpen(false), 1000)
+  }, [path])
 
   return (
     <NavBar className={className} style={style}>
@@ -308,7 +325,7 @@ const Navigation = (props: PropType) => {
         />
       </Logo>
       <Line />
-      <Checkbox
+      <HiddenCheckbox
         checked={isOpen}
         onChange={e => setIsOpen(e.target.checked)}
       />
@@ -327,36 +344,32 @@ const Navigation = (props: PropType) => {
             layout="fill"
           />
         </Close>
-        <Items className="font-secondary">
-          <Item
+        <NavItems className="font-secondary">
+          <NavItem
             number="00"
             name="HOME"
+            href="/"
             spaceBetween={11}
-            isSelected={selected === 0}
-            onClick={() => handleSelected(0)}
           />
-          <Item
+          <NavItem
             number="01"
             name="DESTINATION"
+            href="/destination"
             spaceBetween={14}
-            isSelected={selected === 1}
-            onClick={() => handleSelected(1)}
           />
-          <Item
+          <NavItem
             number="02"
             name="CREW"
+            href="/crew"
             spaceBetween={12}
-            isSelected={selected === 2}
-            onClick={() => handleSelected(2)}
           />
-          <Item
+          <NavItem
             number="03"
             name="TECHNOLOGY"
+            href="/technology"
             spaceBetween={12}
-            isSelected={selected === 3}
-            onClick={() => handleSelected(3)}
           />
-        </Items>
+        </NavItems>
       </BlurBox>
     </NavBar>
   );

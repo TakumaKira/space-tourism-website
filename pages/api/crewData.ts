@@ -1,4 +1,4 @@
-export type Crew = {
+export type CrewData = {
   name: string,
   images: {
     png: string,
@@ -8,7 +8,7 @@ export type Crew = {
   bio: string,
 }
 
-const DouglasHurley: Crew = {
+const DouglasHurley: CrewData = {
   name: 'Douglas Hurley',
   images: {
     png: './assets/crew/image-douglas-hurley.png',
@@ -18,7 +18,7 @@ const DouglasHurley: Crew = {
   bio: 'Douglas Gerald Hurley is an American engineer, former Marine Corps pilot and former NASA astronaut. He launched into space for the third time as commander of Crew Dragon Demo-2.'
 }
 
-const MarkShuttleworth: Crew = {
+const MarkShuttleworth: CrewData = {
   name: 'Mark Shuttleworth',
   images: {
     png: './assets/crew/image-mark-shuttleworth.png',
@@ -28,7 +28,7 @@ const MarkShuttleworth: Crew = {
   bio: 'Mark Richard Shuttleworth is the founder and CEO of Canonical, the company behind the Linux-based Ubuntu operating system. Shuttleworth became the first South African to travel to space as a space tourist.'
 }
 
-const VictorGlover: Crew = {
+const VictorGlover: CrewData = {
   name: 'Victor Glover',
   images: {
     png: './assets/crew/image-victor-glover.png',
@@ -38,7 +38,7 @@ const VictorGlover: Crew = {
   bio: 'Pilot on the first operational flight of the SpaceX Crew Dragon to the International Space Station. Glover is a commander in the U.S. Navy where he pilots an F/A-18.He was a crew member of Expedition 64, and served as a station systems flight engineer.'
 }
 
-const AnoushehAnsari: Crew = {
+const AnoushehAnsari: CrewData = {
   name: 'Anousheh Ansari',
   images: {
     png: './assets/crew/image-anousheh-ansari.png',
@@ -49,7 +49,7 @@ const AnoushehAnsari: Crew = {
 }
 
 export type Crews = {
-  [key: string]: Crew
+  [key: string]: CrewData
 }
 
 export const crew: Crews = {

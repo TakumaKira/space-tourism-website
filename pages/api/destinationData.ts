@@ -1,4 +1,4 @@
-export type Destination = {
+export type DestinationData = {
   name: string,
   images: {
     png: string,
@@ -9,7 +9,7 @@ export type Destination = {
   travel: string
 }
 
-const moon: Destination = {
+const moon: DestinationData = {
   name: 'Moon',
   images: {
     png: './assets/destination/image-moon.png',
@@ -20,7 +20,7 @@ const moon: Destination = {
   travel: '3 days'
 }
 
-const mars: Destination = {
+const mars: DestinationData = {
   name: 'Mars',
   images: {
     png: './assets/destination/image-mars.png',
@@ -31,7 +31,7 @@ const mars: Destination = {
   travel: '9 months'
 }
 
-const europa: Destination = {
+const europa: DestinationData = {
   name: 'Europa',
   images: {
     png: './assets/destination/image-europa.png',
@@ -42,7 +42,7 @@ const europa: Destination = {
   travel: '3 years'
 }
 
-const titan: Destination = {
+const titan: DestinationData = {
   name: 'Titan',
   images: {
     png: './assets/destination/image-titan.png',
@@ -54,7 +54,7 @@ const titan: Destination = {
 }
 
 export type Destinations = {
-  [key: string]: Destination,
+  [key: string]: DestinationData,
 };
 
 export const destination: Destinations = {

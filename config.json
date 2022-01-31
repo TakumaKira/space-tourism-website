@@ -7,6 +7,15 @@
   "resourcePath": {
     "HOME_BACKGROUND_DESKTOP": "/home/background-home-desktop.jpg",
     "HOME_BACKGROUND_TABLET": "/home/background-home-tablet.jpg",
-    "HOME_BACKGROUND_MOBILE": "/home/background-home-mobile.jpg"
+    "HOME_BACKGROUND_MOBILE": "/home/background-home-mobile.jpg",
+    "DESTINATION_BACKGROUND_DESKTOP": "/destination/background-destination-desktop.jpg",
+    "DESTINATION_BACKGROUND_TABLET": "/destination/background-destination-tablet.jpg",
+    "DESTINATION_BACKGROUND_MOBILE": "/destination/background-destination-mobile.jpg",
+    "CREW_BACKGROUND_DESKTOP": "/crew/background-crew-desktop.jpg",
+    "CREW_BACKGROUND_TABLET": "/crew/background-crew-tablet.jpg",
+    "CREW_BACKGROUND_MOBILE": "/crew/background-crew-mobile.jpg",
+    "TECHNOLOGY_BACKGROUND_DESKTOP": "/technology/background-technology-desktop.jpg",
+    "TECHNOLOGY_BACKGROUND_TABLET": "/technology/background-technology-tablet.jpg",
+    "TECHNOLOGY_BACKGROUND_MOBILE": "/technology/background-technology-mobile.jpg"
   }
 }
