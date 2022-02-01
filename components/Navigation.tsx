@@ -118,16 +118,7 @@ const BlurBox = styled.div<{isOpen: boolean}>`
     top: 0;
     right: 0;
     width: ${props => props.isOpen ? 254 : 0}px;
-    animation-name: ${props => props.isOpen ? 'open' : 'close'};
-    animation-duration: .5s;
-    @keyframes open {
-      from {width: 0px}
-      to {width: 254px}
-    }
-    @keyframes close {
-      from {width: 254px}
-      to {width: 0px}
-    }
+    transition: width 0.5s;
   }
   @media (min-width: ${tabletToMobile}px) {
     width: 450px;
@@ -177,10 +168,6 @@ const ItemContainer = styled.li`
     background-color: #FFFFFF;
     position: absolute;
   }
-  &.selected::after {
-    animation-name: select;
-    animation-duration: .5s;
-  }
   @media (max-width: ${tabletToMobile}px) {
     height: 51px;
     padding-top: 10px;
@@ -190,14 +177,11 @@ const ItemContainer = styled.li`
       width: 4px;
       top: 50%;
       transform: translateY(-50%);
-      height: 0;
+      height: 0px;
+      transition: height 0.5s;
     }
-    &.selected::after {
+    &.selected::after, &:hover::after {
       height: calc(100% - 20px);
-    }
-    @keyframes select {
-      from {height: 0}
-      to {height: calc(100% - 20px)}
     }
   }
   @media (min-width: ${tabletToMobile}px) {
@@ -208,14 +192,11 @@ const ItemContainer = styled.li`
       height: 3px;
       left: 50%;
       transform: translateX(-50%);
-      width: 0;
+      width: 0px;
+      transition: width 0.5s;
     }
-    &.selected::after {
+    &.selected::after, &:hover::after {
       width: calc(100% - 37px);
-    }
-    @keyframes select {
-      from {width: 0}
-      to {width: calc(100% - 37px)}
     }
   }
   @media (min-width: ${desktopToTablet}px) {
@@ -226,14 +207,11 @@ const ItemContainer = styled.li`
       height: 3px;
       left: 50%;
       transform: translateX(-50%);
-      width: 0;
+      width: 0px;
+      transition: width 0.5s;
     }
-    &.selected::after {
+    &.selected::after, &:hover::after {
       width: calc(100% - 48px);
-    }
-    @keyframes select {
-      from {width: 0}
-      to {width: calc(100% - 48px)}
     }
   }
 `;

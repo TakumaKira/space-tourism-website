@@ -26,3 +26,7 @@ ol {
 .font-secondary {
   font-family: 'Barlow Condensed', sans-serif;
 }
+
+.font-body {
+  font-family: 'Barlow', sans-serif;
+}
