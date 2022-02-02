@@ -23,7 +23,7 @@ export const Background = styled.div<{path: string}>`
       return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_MOBILE`]})`
     }}
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
     background-image: ${({path}) => {
       return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_TABLET`]})`
     }}
