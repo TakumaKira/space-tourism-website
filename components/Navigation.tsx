@@ -118,7 +118,7 @@ const BlurBox = styled.div<{isOpen: boolean}>`
     top: 0;
     right: 0;
     width: ${props => props.isOpen ? 254 : 0}px;
-    transition: width 0.5s;
+    transition: width 0.4s;
   }
   @media (min-width: ${tabletToMobile}px) {
     width: 450px;
@@ -178,7 +178,7 @@ const ItemContainer = styled.li`
       top: 50%;
       transform: translateY(-50%);
       height: 0px;
-      transition: height 0.5s;
+      transition: height 0.3s;
     }
     &.selected::after, &:hover::after {
       height: calc(100% - 20px);
@@ -193,7 +193,7 @@ const ItemContainer = styled.li`
       left: 50%;
       transform: translateX(-50%);
       width: 0px;
-      transition: width 0.5s;
+      transition: width 0.3s;
     }
     &.selected::after, &:hover::after {
       width: calc(100% - 37px);
@@ -208,7 +208,7 @@ const ItemContainer = styled.li`
       left: 50%;
       transform: translateX(-50%);
       width: 0px;
-      transition: width 0.5s;
+      transition: width 0.3s;
     }
     &.selected::after, &:hover::after {
       width: calc(100% - 48px);
