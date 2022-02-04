@@ -1,7 +1,7 @@
 {
   "title": "Space tourism",
   "responsiveBreakPointWidth": {
-    "desktopToTablet": 1024,
+    "desktopToTablet": 1200,
     "tabletToMobile": 600
   },
   "resourcePath": {

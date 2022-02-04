@@ -16,18 +16,16 @@ const {
 
 const TextBox = styled.div`
   @media (max-width: ${tabletToMobile}px) {
-    position: absolute;
+    position: relative;
     width: 327px;
     height: 276px;
-    left: 24px;
-    top: 112px;
+    margin: 24px auto 0;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
-    position: absolute;
+    position: relative;
     width: 450px;
     height: 334px;
-    left: 159px;
-    top: 202px;
+    margin: 106px auto 0;
   }
   @media (min-width: ${desktopToTablet}px) {
     position: absolute;
@@ -212,24 +210,22 @@ const P = styled.p`
 
 const CircleContainer = styled.div`
   @media (max-width: ${tabletToMobile}px) {
-    position: absolute;
+    position: relative;
     width: 150px;
     height: 150px;
-    left: 113px;
-    top: 469px;
+    margin: 81px auto 0;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
-    position: absolute;
+    position: relative;
     width: 242px;
     height: 242px;
-    left: 263px;
-    top: 692px;
+    margin: 156px auto 0;
   }
   @media (min-width: ${desktopToTablet}px) {
     position: absolute;
     width: 274px;
     height: 274px;
-    left: 1001px;
+    right: 165px;
     top: 495px;
   }
 `
