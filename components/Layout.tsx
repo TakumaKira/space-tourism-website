@@ -18,13 +18,13 @@ export const Background = styled.div<{path: string}>`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     min-height: 667px;
     background-image: ${({path}) => {
       return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_MOBILE`]})`
     }}
   }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     min-height: 1024px;
     background-image: ${({path}) => {
       return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_TABLET`]})`
