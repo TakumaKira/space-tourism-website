@@ -16,7 +16,7 @@ a {
   box-sizing: border-box;
 }
 
-ol {
+ol, ul {
   list-style-type: none;
   margin-block-start: 0;
   margin-block-end: 0;
