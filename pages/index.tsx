@@ -15,13 +15,13 @@ const {
 } = config;
 
 const TextBox = styled.div`
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     position: relative;
     width: 327px;
     height: 276px;
     margin: 24px auto 0;
   }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     position: relative;
     width: 450px;
     height: 334px;
@@ -44,7 +44,7 @@ const H2 = styled.h2`
   font-style: normal;
   font-weight: normal;
   color: #D0D6F9;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     height: 19px;
     left: 16.82%;
     right: 16.82%;
@@ -55,7 +55,7 @@ const H2 = styled.h2`
     text-align: center;
     letter-spacing: 2.7px;
   }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 24px;
     left: 20%;
     right: 19.78%;
@@ -89,7 +89,7 @@ const H1 = styled.h1`
   font-style: normal;
   font-weight: normal;
   color: #FFFFFF;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     height: 100px;
     left: 0%;
     right: 0%;
@@ -102,7 +102,7 @@ const H1 = styled.h1`
     text-align: center;
 
   }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 150px;
     left: 0%;
     right: 1.11%;
@@ -131,7 +131,7 @@ const P = styled.p`
   font-style: normal;
   font-weight: normal;
   color: #D0D6F9;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     height: 125px;
     left: 0%;
     right: 0%;
@@ -144,7 +144,7 @@ const P = styled.p`
     text-align: center;
 
   }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 112px;
     left: 0.67%;
     right: 0.67%;
@@ -169,13 +169,13 @@ const P = styled.p`
 `
 
 const CircleContainer = styled.div`
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     position: relative;
     width: 150px;
     height: 150px;
     margin: 81px auto 0;
   }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     position: relative;
     width: 242px;
     height: 242px;
@@ -216,7 +216,7 @@ const CircleLabel = styled.span`
   font-style: normal;
   font-weight: normal;
   color: #0B0D17;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     height: 23px;
     left: 19.67%;
     right: 18.33%;
@@ -229,7 +229,7 @@ const CircleLabel = styled.span`
     text-align: center;
     letter-spacing: 1.25px;
   }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 37px;
     left: 19.01%;
     right: 19.83%;

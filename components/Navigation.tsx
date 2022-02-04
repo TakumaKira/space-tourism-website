@@ -15,10 +15,10 @@ const {
 
 const NavBar = styled.nav`
   width: 100%;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     height: 88px;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 96px;
   }
   @media (min-width: ${desktopToTablet}px) {
@@ -34,12 +34,12 @@ const Logo = styled.div`
   position: relative;
   display: flex;
   flex-shrink: 0;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     margin-left: 24px;
     height: 40px;
     width: 40px;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-left: 39px;
     height: 48px;
     width: 48px;
@@ -73,7 +73,7 @@ const HiddenCheckbox = styled.input.attrs(props => ({
 const Hamburger = styled.label.attrs(props => ({
   htmlFor: 'hamburger',
 }))`
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     position: absolute;
     display: flex;
     top: 33px;
@@ -82,7 +82,7 @@ const Hamburger = styled.label.attrs(props => ({
     width: 24px;
     cursor: pointer;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     display: none;
   }
   @media (min-width: ${desktopToTablet}px) {
@@ -93,7 +93,7 @@ const Hamburger = styled.label.attrs(props => ({
 const Close = styled.label.attrs(props => ({
   htmlFor: 'hamburger',
 }))`
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     position: relative;
     display: flex;
     top: 33.95px;
@@ -102,7 +102,7 @@ const Close = styled.label.attrs(props => ({
     width: 19.09px;
     cursor: pointer;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     display: none;
   }
   @media (min-width: ${desktopToTablet}px) {
@@ -112,7 +112,7 @@ const Close = styled.label.attrs(props => ({
 
 const BlurBox = styled.div<{isOpen: boolean}>`
   height: 100%;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     position: absolute;
     overflow: hidden;
     top: 0;
@@ -120,7 +120,7 @@ const BlurBox = styled.div<{isOpen: boolean}>`
     width: ${props => props.isOpen ? 254 : 0}px;
     transition: width 0.4s;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     width: 450px;
   }
   @media (min-width: ${desktopToTablet}px) {
@@ -135,14 +135,14 @@ const BlurBox = styled.div<{isOpen: boolean}>`
 
 const NavItems = styled.ol`
   display: flex;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     flex-direction: column;
     margin-top: 102px;
     font-size: 16px;
     letter-spacing: 2.7px;
     line-height: 19.2px;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 100%;
     margin-left: 29.5px;
     font-size: 14px;
@@ -168,7 +168,7 @@ const ItemContainer = styled.li`
     background-color: #FFFFFF;
     position: absolute;
   }
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     height: 51px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -184,7 +184,7 @@ const ItemContainer = styled.li`
       height: calc(100% - 20px);
     }
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     padding-left: 18.5px;
     padding-right: 18.5px;
     &::after {
@@ -217,10 +217,10 @@ const ItemContainer = styled.li`
 `;
 
 const Texts = styled.div`
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     margin-left: 32px;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 100%;
     display: flex;
     align-items: center;
@@ -235,10 +235,10 @@ const Texts = styled.div`
 const Number = styled.span<{spaceBetween: number}>`
   font-weight: bold;
   margin-right: ${props => props.spaceBetween}px;
-  @media (max-width: ${tabletToMobile}px) {
+  @media (max-width: ${tabletToMobile - 1}px) {
     display: inline;
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     display: none;
   }
   @media (min-width: ${desktopToTablet}px) {
