@@ -216,6 +216,7 @@ const CircleLabel = styled.span`
   font-style: normal;
   font-weight: normal;
   color: #0B0D17;
+  pointer-events: none;
   @media (max-width: ${tabletToMobile - 1}px) {
     height: 23px;
     left: 19.67%;
