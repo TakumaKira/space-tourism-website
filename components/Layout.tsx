@@ -17,18 +17,21 @@ const resourcePath = config.resourcePath as StringKeyObject<string>
 export const Background = styled.div<{path: string}>`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   @media (max-width: ${tabletToMobile}px) {
+    min-height: 667px;
     background-image: ${({path}) => {
       return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_MOBILE`]})`
     }}
   }
-  @media (min-width: ${tabletToMobile}px) {
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet}px) {
+    min-height: 1024px;
     background-image: ${({path}) => {
       return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_TABLET`]})`
     }}
   }
   @media (min-width: ${desktopToTablet}px) {
+    min-height: 900px;
     background-image: ${({path}) => {
       return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_DESKTOP`]})`
     }}
