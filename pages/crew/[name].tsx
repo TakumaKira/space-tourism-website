@@ -83,8 +83,6 @@ const TextBox = styled.div`
     flex-direction: column;
     align-items: center;
   }
-  @media (min-width: ${desktopToTablet}px) {
-  }
 `
 const Role = styled.h2`
   font-weight: normal;
@@ -171,14 +169,7 @@ const TabBox = styled.ul`
     }
   }
 `
-const Tab = styled.li<{selected: boolean}>`
-  @media (max-width: ${tabletToMobile - 1}px) {
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-  }
-  @media (min-width: ${desktopToTablet}px) {
-  }
-`
+const Tab = styled.li<{selected: boolean}>``
 const A = styled.a<{selected: boolean}>`
   position: relative;
   display: block;
