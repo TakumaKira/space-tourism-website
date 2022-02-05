@@ -101,7 +101,8 @@ const TabBox = styled.ul`
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
   }
   @media (min-width: ${desktopToTablet}px) {
-    margin-top: 120px;
+    position: absolute;
+    bottom: 94px;
     & > *:not(:first-child) {
       margin-left: 24px;
     }
