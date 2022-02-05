@@ -120,6 +120,7 @@ const BlurBox = styled.div<{isOpen: boolean}>`
     right: 0;
     width: ${props => props.isOpen ? 254 : 0}px;
     transition: width 0.4s;
+    z-index: 1;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     width: 450px;

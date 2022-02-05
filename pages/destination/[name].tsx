@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { data } from '../api/data';
 import { DestinationData } from '../api/destinationData';
@@ -13,46 +14,6 @@ const {
     tabletToMobile,
   },
 } = config;
-
-const Header = styled.div`
-  font-family: Barlow Condensed;
-  color: #FFFFFF;
-  @media (max-width: ${tabletToMobile - 1}px) {
-    text-align: center;
-    font-size: 16px;
-    letter-spacing: 2.7px;
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-    position: absolute;
-    top: 136px;
-    left: 38.5px;
-    font-size: 20px;
-    letter-spacing: 3.375px;
-  }
-  @media (min-width: ${desktopToTablet}px) {
-    position: absolute;
-    top: 212px;
-    left: 166.5px;
-    font-size: 28px;
-    letter-spacing: 4.725px;
-  }
-`
-const HeaderNum = styled.span`
-  font-weight: bold;
-  opacity: 0.25;
-`
-const HeaderText = styled.span`
-  font-weight: normal;
-  @media (max-width: ${tabletToMobile - 1}px) {
-    margin-left: 18px;
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-    margin-left: 19px;
-  }
-  @media (min-width: ${desktopToTablet}px) {
-    margin-left: 28px;
-  }
-`
 
 const Contents = styled.div`
   display: flex;
@@ -286,19 +247,23 @@ const TabItem: NextPage<TabItemProps> = ({destinationName}) => {
   )
 }
 
+export const DESTINATION_HEADER_NUM = '01'
+export const DESTINATION_HEADER_TEXT = 'PICK YOUR DESTINATION'
+
 interface Props {
   destination: DestinationData,
 }
 const Destination: NextPage<Props> = ({ destination }) => {
   return (
     <>
-      <Header>
-        <HeaderNum>01</HeaderNum>
-        <HeaderText>PICK YOUR DESTINATION</HeaderText>
-      </Header>
+      <PositionedHeader num={DESTINATION_HEADER_NUM} text={DESTINATION_HEADER_TEXT} />
       <Contents>
         <Planet>
-          <Image src={destination.images.png} alt={destination.name} layout="fill" />
+          <Image
+            src={destination.images.webp}
+            alt={destination.name}
+            layout="fill"
+          />
         </Planet>
         <TextBox>
           <TabBox>

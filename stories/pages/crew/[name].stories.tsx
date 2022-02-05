@@ -20,15 +20,47 @@ export const DouglasHurley = Template.bind({});
 DouglasHurley.args = {
   crew: data.crew.DouglasHurley as CrewData,
 };
+DouglasHurley.parameters = {
+  nextRouter: {
+    pathname: '/crew/[name]',
+    query: {
+      name: 'DouglasHurley',
+    }
+  },
+}
 export const MarkShuttleworth = Template.bind({});
 MarkShuttleworth.args = {
   crew: data.crew.MarkShuttleworth as CrewData,
 };
+MarkShuttleworth.parameters = {
+  nextRouter: {
+    pathname: '/crew/[name]',
+    query: {
+      name: 'MarkShuttleworth',
+    }
+  },
+}
 export const VictorGlover = Template.bind({});
 VictorGlover.args = {
   crew: data.crew.VictorGlover as CrewData,
 };
+VictorGlover.parameters = {
+  nextRouter: {
+    pathname: '/crew/[name]',
+    query: {
+      name: 'VictorGlover',
+    }
+  },
+}
 export const AnoushehAnsari = Template.bind({});
 AnoushehAnsari.args = {
   crew: data.crew.AnoushehAnsari as CrewData,
-};
+}
+AnoushehAnsari.parameters = {
+  nextRouter: {
+    pathname: '/crew/[name]',
+    query: {
+      name: 'AnoushehAnsari',
+    }
+  },
+}
