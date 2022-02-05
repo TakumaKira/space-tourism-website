@@ -54,6 +54,8 @@ export const Background = styled.div<{path: string}>`
 
 const Main = styled.main`
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `
 
 interface Props {

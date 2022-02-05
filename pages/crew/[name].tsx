@@ -20,16 +20,41 @@ const Contents = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 124px;
+    min-height: 804px;
+    flex-grow: 1;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     height: 100%;
+    overflow: hidden;
   }
 `
 
-const TextAndTab = styled.div`
+const TextAndTab = styled.div<{crewName: string}>`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    width: ${({crewName}) => {
+      switch (crewName) {
+        case 'DouglasHurley':
+          return '458px'
+        case 'MarkShuttleworth':
+          return '520px'
+        case 'VictorGlover':
+          return '592px'
+        case 'AnoushehAnsari':
+          return '536px'
+        default:
+          throw new Error(`Width of crewName "${crewName}" is not defined`)
+      }
+    }};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 264px;
@@ -41,6 +66,9 @@ const TextBox = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${desktopToTablet}px) {
   }
@@ -54,6 +82,7 @@ const Role = styled.h2`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    font-size: 24px;
   }
   @media (min-width: ${desktopToTablet}px) {
     font-size: 32px;
@@ -68,11 +97,12 @@ const Name = styled.h1`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 8px;
+    font-size: 40px;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 15px;
     font-size: 56px;
-    line-height: 64px;
   }
 `
 const Bio = styled.p`
@@ -84,6 +114,13 @@ const Bio = styled.p`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 16px;
+    font-family: Barlow;
+    font-size: 16px;
+    line-height: 28px;
+    /* or 175% */
+    text-align: center;
+    color: #D0D6F9;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 15px;
@@ -99,6 +136,10 @@ const TabBox = styled.ul`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 40px;
+    & > *:not(:first-child) {
+      margin-left: 16px;
+    }
   }
   @media (min-width: ${desktopToTablet}px) {
     position: absolute;
@@ -144,6 +185,62 @@ const CrewImage = styled.div<{crewName: string}>`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    width: ${({crewName}) => {
+      switch (crewName) {
+        case 'DouglasHurley':
+          return '456.37px'
+        case 'MarkShuttleworth':
+          return '368.85px'
+        case 'VictorGlover':
+          return '433.09px'
+        case 'AnoushehAnsari':
+          return '539.51px'
+        default:
+          throw new Error(`Width of crewName "${crewName}" is not defined`)
+      }
+    }};
+    height: ${({crewName}) => {
+      switch (crewName) {
+        case 'DouglasHurley':
+          return '572px'
+        case 'MarkShuttleworth':
+          return '532px'
+        case 'VictorGlover':
+          return '532px'
+        case 'AnoushehAnsari':
+          return '532px'
+        default:
+          throw new Error(`Height of crewName "${crewName}" is not defined`)
+      }
+    }};
+    bottom: ${({crewName}) => {
+      switch (crewName) {
+        case 'DouglasHurley':
+          return '-40px'
+        case 'MarkShuttleworth':
+          return '0px'
+        case 'VictorGlover':
+          return '-12px'
+        case 'AnoushehAnsari':
+          return '0px'
+        default:
+          throw new Error(`Width of crewName "${crewName}" is not defined`)
+      }
+    }};
+    left: ${({crewName}) => {
+      switch (crewName) {
+        case 'DouglasHurley':
+          return '0px'
+        case 'MarkShuttleworth':
+          return '0px'
+        case 'VictorGlover':
+          return '-11.5px'
+        case 'AnoushehAnsari':
+          return '19.75px'
+        default:
+          throw new Error(`Width of crewName "${crewName}" is not defined`)
+      }
+    }};
   }
   @media (min-width: ${desktopToTablet}px) {
     align-self: flex-end;
@@ -203,6 +300,20 @@ const CrewImage = styled.div<{crewName: string}>`
           throw new Error(`Height of crewName "${crewName}" is not defined`)
       }
     }};
+    bottom: ${({crewName}) => {
+      switch (crewName) {
+        case 'DouglasHurley':
+          return '-10px'
+        case 'MarkShuttleworth':
+          return '0px'
+        case 'VictorGlover':
+          return '-27px'
+        case 'AnoushehAnsari':
+          return '-1px'
+        default:
+          throw new Error(`Width of crewName "${crewName}" is not defined`)
+      }
+    }};
   }
 `
 
@@ -236,7 +347,7 @@ const Crew: NextPage<Props> = ({ crew }) => {
     <>
       <PositionedHeader num={CREW_HEADER_NUM} text={CREW_HEADER_TEXT} />
       <Contents>
-        <TextAndTab>
+        <TextAndTab crewName={name as string}>
           <TextBox>
             <Role>{crew.role}</Role>
             <Name>{crew.name}</Name>
@@ -254,6 +365,7 @@ const Crew: NextPage<Props> = ({ crew }) => {
             src={crew.images.webp}
             alt={crew.name}
             layout="fill"
+            objectFit='contain'
           />
         </CrewImage>
       </Contents>
