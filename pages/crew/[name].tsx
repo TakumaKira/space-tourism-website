@@ -18,6 +18,11 @@ const {
 const Contents = styled.div`
   display: flex;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    width: 327px;
+    flex-direction: column-reverse;
+    align-items: center;
+    align-self: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 124px;
@@ -36,6 +41,10 @@ const Contents = styled.div`
 
 const TextAndTab = styled.div<{crewName: string}>`
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     width: ${({crewName}) => {
@@ -64,6 +73,10 @@ const TextAndTab = styled.div<{crewName: string}>`
 
 const TextBox = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     display: flex;
@@ -80,6 +93,7 @@ const Role = styled.h2`
   margin-block-end: 0;
   opacity: 0.5;
   @media (max-width: ${tabletToMobile - 1}px) {
+    font-size: 16px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     font-size: 24px;
@@ -95,6 +109,8 @@ const Name = styled.h1`
   margin-block-start: 0;
   margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 8px;
+    font-size: 24px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 8px;
@@ -112,15 +128,18 @@ const Bio = styled.p`
   margin-block-end: 0;
   color: #D0D6F9;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 25px;
+    /* or 167% */
+    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 16px;
-    font-family: Barlow;
     font-size: 16px;
     line-height: 28px;
     /* or 175% */
     text-align: center;
-    color: #D0D6F9;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 15px;
@@ -134,6 +153,9 @@ const Bio = styled.p`
 const TabBox = styled.ul`
   display: flex;
   @media (max-width: ${tabletToMobile - 1}px) {
+    & > *:not(:first-child) {
+      margin-left: 16px;
+    }
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 40px;
@@ -160,8 +182,6 @@ const Tab = styled.li<{selected: boolean}>`
 const A = styled.a<{selected: boolean}>`
   position: relative;
   display: block;
-  width: 15px;
-  height: 15px;
   &::before {
     position: absolute;
     content: '';
@@ -172,10 +192,16 @@ const A = styled.a<{selected: boolean}>`
     opacity: ${({selected}) => selected ? '1' : '0.17'};
   }
   @media (max-width: ${tabletToMobile - 1}px) {
+    width: 10px;
+    height: 10px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    width: 15px;
+    height: 15px;
   }
   @media (min-width: ${desktopToTablet}px) {
+    width: 15px;
+    height: 15px;
   }
 `
 
@@ -183,6 +209,16 @@ const CrewImage = styled.div<{crewName: string}>`
   position: relative;
   flex-shrink: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
+    width: 100%;
+    height: 223px;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #383B4B;
+    }
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     width: ${({crewName}) => {
