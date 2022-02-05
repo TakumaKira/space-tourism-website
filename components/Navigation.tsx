@@ -15,6 +15,7 @@ const {
 
 const NavBar = styled.nav`
   width: 100%;
+  flex-shrink: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
     height: 88px;
   }

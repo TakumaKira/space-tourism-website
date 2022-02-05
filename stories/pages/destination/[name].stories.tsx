@@ -20,15 +20,47 @@ export const Moon = Template.bind({});
 Moon.args = {
   destination: data.destination.moon as DestinationData,
 };
+Moon.parameters = {
+  nextRouter: {
+    pathname: '/destination/[name]',
+    query: {
+      name: 'moon',
+    }
+  },
+}
 export const Mars = Template.bind({});
 Mars.args = {
   destination: data.destination.mars as DestinationData,
 };
+Mars.parameters = {
+  nextRouter: {
+    pathname: '/destination/[name]',
+    query: {
+      name: 'mars',
+    }
+  },
+}
 export const Europa = Template.bind({});
 Europa.args = {
   destination: data.destination.europa as DestinationData,
 };
+Europa.parameters = {
+  nextRouter: {
+    pathname: '/destination/[name]',
+    query: {
+      name: 'europa',
+    }
+  },
+}
 export const Titan = Template.bind({});
 Titan.args = {
   destination: data.destination.titan as DestinationData,
-};
+}
+Titan.parameters = {
+  nextRouter: {
+    pathname: '/destination/[name]',
+    query: {
+      name: 'titan',
+    }
+  },
+}

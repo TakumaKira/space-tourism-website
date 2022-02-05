@@ -18,6 +18,9 @@ const Header = styled.div`
   font-family: Barlow Condensed;
   color: #FFFFFF;
   @media (max-width: ${tabletToMobile - 1}px) {
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 2.7px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     position: absolute;
@@ -37,16 +40,11 @@ const Header = styled.div`
 const HeaderNum = styled.span`
   font-weight: bold;
   opacity: 0.25;
-  @media (max-width: ${tabletToMobile - 1}px) {
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-  }
-  @media (min-width: ${desktopToTablet}px) {
-  }
 `
 const HeaderText = styled.span`
   font-weight: normal;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-left: 18px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-left: 19px;
@@ -59,13 +57,15 @@ const HeaderText = styled.span`
 const Contents = styled.div`
   display: flex;
   @media (max-width: ${tabletToMobile - 1}px) {
+    width: 327px;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 124px;
     flex-direction: column;
     align-items: center;
-  }
-  @media (min-width: ${desktopToTablet}px) {
   }
 `
 
@@ -73,6 +73,9 @@ const Planet = styled.div`
   position: relative;
   flex-shrink: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    width: 170px;
+    height: 170px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     width: 300px;
@@ -90,6 +93,8 @@ const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 26px;
+    align-items: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 53px;
@@ -108,6 +113,12 @@ const TabBox = styled.ul`
   font-family: Barlow Condensed;
   color: #D0D6F9;
   @media (max-width: ${tabletToMobile - 1}px) {
+    height: 28px;
+    & > *:not(:first-child) {
+      margin-left: 27px;
+    }
+    font-size: 14px;
+    letter-spacing: 2.3625px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 34px;
@@ -128,12 +139,6 @@ const TabBox = styled.ul`
 `
 const Tab = styled.li<{selected: boolean}>`
   position: relative;
-  @media (max-width: ${tabletToMobile - 1}px) {
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-  }
-  @media (min-width: ${desktopToTablet}px) {
-  }
   color: ${props => props.selected ? '#FFFFFF' : 'inherit'};
   &::after {
     content: '';
@@ -161,6 +166,8 @@ const H1 = styled.h1`
   margin-block-start: 0;
   margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 20px;
+    font-size: 56px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 32px;
@@ -178,6 +185,11 @@ const Description = styled.p`
   margin-block-end: 0;
   color: #D0D6F9;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 1px;
+    font-size: 15px;
+    line-height: 25px;
+    /* or 167% */
+    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 8px;
@@ -204,6 +216,10 @@ const StatBox = styled.div`
   }
   display: flex;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    width: 327px;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 49px;
@@ -219,6 +235,8 @@ const Stat = styled.div`
   display: flex;
   flex-direction: column;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 28px;
@@ -243,31 +261,13 @@ const Stat = styled.div`
 const StatLabel = styled.span`
   font-family: Barlow Condensed;
   color: #D0D6F9;
-  @media (max-width: ${tabletToMobile - 1}px) {
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-    font-size: 14px;
-    /* identical to box height */
-    letter-spacing: 2.3625px;
-  }
-  @media (min-width: ${desktopToTablet}px) {
-    font-size: 14px;
-    /* identical to box height */
-    letter-spacing: 2.3625px;
-  }
+  font-size: 14px;
+  letter-spacing: 2.3625px;
 `
 const StatInfo = styled.span`
   text-transform: uppercase;
-  @media (max-width: ${tabletToMobile - 1}px) {
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-    margin-top: 12px;
-    font-size: 28px;
-  }
-  @media (min-width: ${desktopToTablet}px) {
-    margin-top: 12px;
-    font-size: 28px;
-  }
+  margin-top: 12px;
+  font-size: 28px;
 `
 
 interface TabItemProps {
