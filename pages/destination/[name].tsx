@@ -20,6 +20,11 @@ const Header = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    position: absolute;
+    top: 136px;
+    left: 38.5px;
+    font-size: 20px;
+    letter-spacing: 3.375px;
   }
   @media (min-width: ${desktopToTablet}px) {
     position: absolute;
@@ -44,6 +49,7 @@ const HeaderText = styled.span`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-left: 19px;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-left: 28px;
@@ -51,12 +57,15 @@ const HeaderText = styled.span`
 `
 
 const Contents = styled.div`
+  display: flex;
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 124px;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${desktopToTablet}px) {
-    display: flex;
   }
 `
 
@@ -66,6 +75,8 @@ const Planet = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    width: 300px;
+    height: 300px;
   }
   @media (min-width: ${desktopToTablet}px) {
     width: 445px;
@@ -76,9 +87,14 @@ const Planet = styled.div`
 `
 
 const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 53px;
+    width: 573px;
+    align-items: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     width: 445px;
@@ -94,6 +110,12 @@ const TabBox = styled.ul`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    height: 34px;
+    & > *:not(:first-child) {
+      margin-left: 36px;
+    }
+    font-size: 16px;
+    letter-spacing: 2.7px;
   }
   @media (min-width: ${desktopToTablet}px) {
     height: 34px;
@@ -141,10 +163,12 @@ const H1 = styled.h1`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 32px;
+    font-size: 80px;
   }
   @media (min-width: ${desktopToTablet}px) {
-    font-size: 100px;
     margin-top: 37px;
+    font-size: 100px;
   }
 `
 
@@ -156,12 +180,16 @@ const Description = styled.p`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
+    margin-top: 14px;
     font-size: 18px;
     line-height: 32px;
     /* or 178% */
-    margin-top: 14px;
   }
 `
 
@@ -178,6 +206,9 @@ const StatBox = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 49px;
+    width: 573px;
+    justify-content: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 54px;
@@ -190,6 +221,17 @@ const Stat = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 28px;
+    &:not(:first-child) {
+      margin-left: 79px;
+    }
+    &:nth-child(1) {
+      width: 216px;
+    }
+    &:nth-child(2) {
+      width: 223px;
+    }
+    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 28px;
@@ -204,11 +246,13 @@ const StatLabel = styled.span`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    font-size: 14px;
+    /* identical to box height */
+    letter-spacing: 2.3625px;
   }
   @media (min-width: ${desktopToTablet}px) {
     font-size: 14px;
     /* identical to box height */
-
     letter-spacing: 2.3625px;
   }
 `
@@ -217,6 +261,8 @@ const StatInfo = styled.span`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 12px;
+    font-size: 28px;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 12px;
