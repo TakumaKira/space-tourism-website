@@ -55,7 +55,6 @@ const Header: NextPage<Props> = ({num, text, className}) => {
     </Container>
   )
 }
-
 export default Header
 
 export const PositionedHeader = styled(Header)<{num: string, text: string}>`

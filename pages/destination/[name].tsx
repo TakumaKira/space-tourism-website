@@ -259,7 +259,11 @@ const Destination: NextPage<Props> = ({ destination }) => {
       <PositionedHeader num={DESTINATION_HEADER_NUM} text={DESTINATION_HEADER_TEXT} />
       <Contents>
         <Planet>
-          <Image src={destination.images.png} alt={destination.name} layout="fill" />
+          <Image
+            src={destination.images.webp}
+            alt={destination.name}
+            layout="fill"
+          />
         </Planet>
         <TextBox>
           <TabBox>

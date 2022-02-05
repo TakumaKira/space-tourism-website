@@ -52,6 +52,10 @@ export const Background = styled.div<{path: string}>`
   background-position: center;
 `;
 
+const Main = styled.main`
+  height: 100%;
+`
+
 interface Props {
   children: JSX.Element,
 }
@@ -62,7 +66,7 @@ const Layout: NextPage<Props> = ({children}) => {
   return (
     <Background path={path}>
       <Navigation />
-      <main>{children}</main>
+      <Main>{children}</Main>
     </Background>
   );
 }
