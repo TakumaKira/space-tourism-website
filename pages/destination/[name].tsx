@@ -1,14 +1,327 @@
-import type { NextPage } from 'next'
-import { DestinationData } from '../api/destinationData'
-import { data } from '../api/data'
+import type { NextPage } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import config from '../../config.json';
+import { data } from '../api/data';
+import { DestinationData } from '../api/destinationData';
+
+const {
+  responsiveBreakPointWidth: {
+    desktopToTablet,
+    tabletToMobile,
+  },
+} = config;
+
+const Header = styled.div`
+  font-family: Barlow Condensed;
+  color: #FFFFFF;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 2.7px;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    position: absolute;
+    top: 136px;
+    left: 38.5px;
+    font-size: 20px;
+    letter-spacing: 3.375px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    position: absolute;
+    top: 212px;
+    left: 166.5px;
+    font-size: 28px;
+    letter-spacing: 4.725px;
+  }
+`
+const HeaderNum = styled.span`
+  font-weight: bold;
+  opacity: 0.25;
+`
+const HeaderText = styled.span`
+  font-weight: normal;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    margin-left: 18px;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-left: 19px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    margin-left: 28px;
+  }
+`
+
+const Contents = styled.div`
+  display: flex;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    width: 327px;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 124px;
+    flex-direction: column;
+    align-items: center;
+  }
+`
+
+const Planet = styled.div`
+  position: relative;
+  flex-shrink: 0;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    width: 170px;
+    height: 170px;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    width: 300px;
+    height: 300px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    width: 445px;
+    height: 445px;
+    margin-left: calc(230px - (1440px - 100%)/2);
+    margin-top: 207px;
+  }
+`
+
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 26px;
+    align-items: center;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 53px;
+    width: 573px;
+    align-items: center;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    width: 445px;
+    margin-left: 157px;
+    margin-top: 174px;
+  }
+`
+
+const TabBox = styled.ul`
+  display: flex;
+  font-family: Barlow Condensed;
+  color: #D0D6F9;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    height: 28px;
+    & > *:not(:first-child) {
+      margin-left: 27px;
+    }
+    font-size: 14px;
+    letter-spacing: 2.3625px;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    height: 34px;
+    & > *:not(:first-child) {
+      margin-left: 36px;
+    }
+    font-size: 16px;
+    letter-spacing: 2.7px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    height: 34px;
+    & > *:not(:first-child) {
+      margin-left: 36px;
+    }
+    font-size: 16px;
+    letter-spacing: 2.7px;
+  }
+`
+const Tab = styled.li<{selected: boolean}>`
+  position: relative;
+  color: ${props => props.selected ? '#FFFFFF' : 'inherit'};
+  &::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: ${props => props.selected ? '100%' : '0px'};
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s;
+    background-color: #FFFFFF;
+  }
+  &:hover::after {
+    width: 100%;
+  }
+`
+const A = styled.a`
+  display: block;
+  height: 100%;
+  text-transform: uppercase;
+`
+
+const H1 = styled.h1`
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 20px;
+    font-size: 56px;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 32px;
+    font-size: 80px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    margin-top: 37px;
+    font-size: 100px;
+  }
+`
+
+const Description = styled.p`
+  font-family: Barlow;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  color: #D0D6F9;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 1px;
+    font-size: 15px;
+    line-height: 25px;
+    /* or 167% */
+    text-align: center;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    margin-top: 14px;
+    font-size: 18px;
+    line-height: 32px;
+    /* or 178% */
+  }
+`
+
+const StatBox = styled.div`
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background-color: #383B4B;
+  }
+  display: flex;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    width: 327px;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 49px;
+    width: 573px;
+    justify-content: center;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    margin-top: 54px;
+    width: 444px;
+  }
+`
+const Stat = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 32px;
+    text-align: center;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 28px;
+    &:not(:first-child) {
+      margin-left: 79px;
+    }
+    &:nth-child(1) {
+      width: 216px;
+    }
+    &:nth-child(2) {
+      width: 223px;
+    }
+    text-align: center;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    margin-top: 28px;
+    &:not(:first-child) {
+      margin-left: 79px;
+    }
+  }
+`
+const StatLabel = styled.span`
+  font-family: Barlow Condensed;
+  color: #D0D6F9;
+  font-size: 14px;
+  letter-spacing: 2.3625px;
+`
+const StatInfo = styled.span`
+  text-transform: uppercase;
+  margin-top: 12px;
+  font-size: 28px;
+`
+
+interface TabItemProps {
+  destinationName: string,
+}
+const TabItem: NextPage<TabItemProps> = ({destinationName}) => {
+  const router = useRouter()
+  const { name } = router.query
+
+  return (
+    <Tab selected={name === destinationName}>
+      <Link href={`/destination/${destinationName}`} passHref>
+        <A>{destinationName}</A>
+      </Link>
+    </Tab>
+  )
+}
 
 interface Props {
   destination: DestinationData,
 }
 const Destination: NextPage<Props> = ({ destination }) => {
-  console.log(destination)
   return (
-    <span>Destination - {destination.name}</span>
+    <>
+      <Header>
+        <HeaderNum>01</HeaderNum>
+        <HeaderText>PICK YOUR DESTINATION</HeaderText>
+      </Header>
+      <Contents>
+        <Planet>
+          <Image src={destination.images.png} alt={destination.name} layout="fill" />
+        </Planet>
+        <TextBox>
+          <TabBox>
+            <TabItem destinationName="moon" />
+            <TabItem destinationName="mars" />
+            <TabItem destinationName="europa" />
+            <TabItem destinationName="titan" />
+          </TabBox>
+          <H1>{destination.name}</H1>
+          <Description>{destination.description}</Description>
+          <StatBox>
+            <Stat>
+              <StatLabel>AVG. DISTANCE</StatLabel>
+              <StatInfo>{destination.distance}</StatInfo>
+            </Stat>
+            <Stat>
+              <StatLabel>EST. TRAVEL TIME</StatLabel>
+              <StatInfo>{destination.travel}</StatInfo>
+            </Stat>
+          </StatBox>
+        </TextBox>
+      </Contents>
+    </>
   )
 }
 
