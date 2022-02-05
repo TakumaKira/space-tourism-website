@@ -57,3 +57,19 @@ const Header: NextPage<Props> = ({num, text, className}) => {
 }
 
 export default Header
+
+export const PositionedHeader = styled(Header)<{num: string, text: string}>`
+  @media (max-width: ${tabletToMobile - 1}px) {
+    text-align: center;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    position: absolute;
+    top: 136px;
+    left: 38.5px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    position: absolute;
+    top: 212px;
+    left: 166.5px;
+  }
+`

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import Header from '../../components/Header';
+import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { data } from '../api/data';
 import { DestinationData } from '../api/destinationData';
@@ -14,22 +14,6 @@ const {
     tabletToMobile,
   },
 } = config;
-
-const PositionedHeader = styled(Header)`
-  @media (max-width: ${tabletToMobile - 1}px) {
-    text-align: center;
-  }
-  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-    position: absolute;
-    top: 136px;
-    left: 38.5px;
-  }
-  @media (min-width: ${desktopToTablet}px) {
-    position: absolute;
-    top: 212px;
-    left: 166.5px;
-  }
-`
 
 const Contents = styled.div`
   display: flex;
