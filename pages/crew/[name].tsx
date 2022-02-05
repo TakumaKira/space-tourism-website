@@ -1,14 +1,44 @@
-import type { NextPage } from 'next'
-import { data } from '../api/data'
-import { CrewData } from '../api/crewData'
+import type { NextPage } from 'next';
+import styled from 'styled-components';
+import Header from '../../components/Header';
+import config from '../../config.json';
+import { CrewData } from '../api/crewData';
+import { data } from '../api/data';
+
+const {
+  responsiveBreakPointWidth: {
+    desktopToTablet,
+    tabletToMobile,
+  },
+} = config;
+
+const PositionedHeader = styled(Header)`
+  @media (max-width: ${tabletToMobile - 1}px) {
+    text-align: center;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    position: absolute;
+    top: 136px;
+    left: 38.5px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
+    position: absolute;
+    top: 212px;
+    left: 166.5px;
+  }
+`
+
+export const CREW_HEADER_NUM = '02'
+export const CREW_HEADER_TEXT = 'MEET YOUR CREW'
 
 interface Props {
   crew: CrewData,
 }
 const Crew: NextPage<Props> = ({ crew }) => {
-  console.log(crew)
   return (
-    <span>Crew - {crew.name}</span>
+    <>
+      <PositionedHeader num={CREW_HEADER_NUM} text={CREW_HEADER_TEXT} />
+    </>
   )
 }
 
