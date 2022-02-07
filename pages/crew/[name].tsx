@@ -169,8 +169,21 @@ const TabBox = styled.ul`
     }
   }
 `
-const Tab = styled.li<{selected: boolean}>``
-const A = styled.a<{selected: boolean}>`
+interface TabItemProps {
+  crewName: string,
+}
+const TabItem: NextPage<TabItemProps> = ({crewName}) => {
+  const router = useRouter()
+  const { name } = router.query
+  return (
+    <li>
+      <Link href={`/crew/${crewName}`} passHref>
+        <Tab selected={name === crewName} />
+      </Link>
+    </li>
+  )
+}
+const Tab = styled.a<{selected: boolean}>`
   position: relative;
   display: block;
   &::before {
@@ -343,22 +356,6 @@ const CrewImage = styled.div<{crewName: string}>`
     }};
   }
 `
-
-interface TabItemProps {
-  crewName: string,
-}
-const TabItem: NextPage<TabItemProps> = ({crewName}) => {
-  const router = useRouter()
-  const { name } = router.query
-
-  return (
-    <Tab selected={name === crewName}>
-      <Link href={`/crew/${crewName}`} passHref>
-        <A selected={name === crewName}/>
-      </Link>
-    </Tab>
-  )
-}
 
 export const CREW_HEADER_NUM = '02'
 export const CREW_HEADER_TEXT = 'MEET YOUR CREW'
