@@ -21,6 +21,8 @@ const Contents = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    flex-direction: column-reverse;
+    margin-top: 124px;
   }
   @media (min-width: ${desktopToTablet}px) {
     justify-content: space-between;
@@ -32,6 +34,9 @@ const TabAndText = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 56px;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 247px;
@@ -44,6 +49,10 @@ const TabBox = styled.ol`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    display: flex;
+    & > *:not(:first-child) {
+      margin-left: 16px;
+    }
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-right: 80px;
@@ -88,6 +97,9 @@ const Tab = styled.a<{selected: boolean}>`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
   }
   @media (min-width: ${desktopToTablet}px) {
     width: 80px;
@@ -97,7 +109,14 @@ const Tab = styled.a<{selected: boolean}>`
 `
 
 const TextBox = styled.div`
-
+  @media (max-width: ${tabletToMobile - 1}px) {
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 const Header = styled.h2`
   font-family: Barlow Condensed;
@@ -108,6 +127,8 @@ const Header = styled.h2`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    font-size: 16px;
+    letter-spacing: 2.7px;
   }
   @media (min-width: ${desktopToTablet}px) {
     font-size: 16px;
@@ -122,6 +143,8 @@ const Name = styled.h1`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 16px;
+    font-size: 40px;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 11px;
@@ -137,6 +160,12 @@ const Description = styled.p`
   @media (max-width: ${tabletToMobile - 1}px) {
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    margin-top: 16px;
+    margin-bottom: 92px;
+    width: 458px;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 17px;
@@ -153,8 +182,8 @@ const TechImage = styled.div`
     height: 170px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-    width: 768px;
-    height: 310px;
+    width: 100%;
+    padding-top: 41%;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 136px;
@@ -203,7 +232,7 @@ const Technology: NextPage<Props> = ({ technology }) => {
             src={isDesktop ? technology.images.portrait : technology.images.landscape}
             alt={technology.name}
             layout="fill"
-            objectFit='contain'
+            objectFit="contain"
           />
         </TechImage>
       </Contents>
