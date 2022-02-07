@@ -11,6 +11,17 @@ export default {
     nextRouter: {
       pathname: '/crew/[name]'
     },
+    viewport: {
+      viewports: {
+        mobile: {
+          name: 'Mobile',
+          styles: {
+            width: '375px',
+            height: '710px',
+          },
+        },
+      },
+    },
   }
 } as ComponentMeta<typeof Crew>;
 
