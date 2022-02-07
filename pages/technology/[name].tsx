@@ -19,6 +19,8 @@ const {
 const Contents = styled.div`
   display: flex;
   @media (max-width: ${tabletToMobile - 1}px) {
+    flex-direction: column-reverse;
+    margin-top: 32px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     flex-direction: column-reverse;
@@ -32,6 +34,9 @@ const Contents = styled.div`
 const TabAndText = styled.div`
   display: flex;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 34px;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 56px;
@@ -47,6 +52,10 @@ const TabAndText = styled.div`
 const TabBox = styled.ol`
   counter-reset: item;
   @media (max-width: ${tabletToMobile - 1}px) {
+    display: flex;
+    & > *:not(:first-child) {
+      margin-left: 16px;
+    }
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     display: flex;
@@ -95,6 +104,9 @@ const Tab = styled.a<{selected: boolean}>`
     font-weight: normal;
   }
   @media (max-width: ${tabletToMobile - 1}px) {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     width: 60px;
@@ -110,12 +122,12 @@ const Tab = styled.a<{selected: boolean}>`
 
 const TextBox = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 26px;
+    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 44px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
   }
 `
 const Header = styled.h2`
@@ -125,6 +137,8 @@ const Header = styled.h2`
   margin-block-start: 0;
   margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
+    font-size: 14px;
+    letter-spacing: 2.3625px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     font-size: 16px;
@@ -141,6 +155,8 @@ const Name = styled.h1`
   margin-block-start: 0;
   margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 9px;
+    font-size: 24px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 16px;
@@ -158,14 +174,16 @@ const Description = styled.p`
   margin-block-start: 0;
   margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
+    margin-top: 16px;
+    width: 327px;
+    font-size: 15px;
+    line-height: 25px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 16px;
-    margin-bottom: 92px;
     width: 458px;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 17px;
@@ -178,8 +196,8 @@ const Description = styled.p`
 const TechImage = styled.div`
   position: relative;
   @media (max-width: ${tabletToMobile - 1}px) {
-    width: 375px;
-    height: 170px;
+    width: 100%;
+    padding-top: 41%;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     width: 100%;
