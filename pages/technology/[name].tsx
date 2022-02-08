@@ -6,6 +6,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
+import { descriptionStyle } from '../../styles/sharedStyles';
 import { data } from '../api/data';
 import { TechnologyData } from '../api/technologyData';
 
@@ -131,11 +132,6 @@ const TextBox = styled.div`
   }
 `
 const Header = styled.h2`
-  font-family: Barlow Condensed;
-  font-weight: normal;
-  color: #D0D6F9;
-  margin-block-start: 0;
-  margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
     font-size: 14px;
     letter-spacing: 2.3625px;
@@ -150,10 +146,7 @@ const Header = styled.h2`
   }
 `
 const Name = styled.h1`
-  font-weight: normal;
   text-transform: uppercase;
-  margin-block-start: 0;
-  margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
     margin-top: 9px;
     font-size: 24px;
@@ -168,28 +161,18 @@ const Name = styled.h1`
   }
 `
 const Description = styled.p`
-  font-family: Barlow;
-  font-weight: normal;
-  color: #D0D6F9;
-  margin-block-start: 0;
-  margin-block-end: 0;
+  ${descriptionStyle}
   @media (max-width: ${tabletToMobile - 1}px) {
     margin-top: 16px;
     width: 327px;
-    font-size: 15px;
-    line-height: 25px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 16px;
     width: 458px;
-    font-size: 16px;
-    line-height: 28px;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 17px;
     width: 444px;
-    font-size: 18px;
-    line-height: 32px;
   }
 `
 
@@ -240,9 +223,9 @@ const Technology: NextPage<Props> = ({ technology }) => {
             <TabItem technologyName="spaceCapsule" />
           </TabBox>
           <TextBox>
-            <Header>THE TERMINOLOGY…</Header>
+            <Header className="font-secondary color-light-blue">THE TERMINOLOGY…</Header>
             <Name>{technology.name}</Name>
-            <Description>{technology.description}</Description>
+            <Description className="font-body color-light-blue">{technology.description}</Description>
           </TextBox>
         </TabAndText>
         <TechImage>

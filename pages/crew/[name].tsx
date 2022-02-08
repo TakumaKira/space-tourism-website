@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
+import { descriptionStyle } from '../../styles/sharedStyles';
 import { CrewData } from '../api/crewData';
 import { data } from '../api/data';
 
@@ -74,21 +75,14 @@ const TextAndTab = styled.div<{crewName: string}>`
 const TextBox = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
     margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
   }
 `
 const Role = styled.h2`
-  font-weight: normal;
   text-transform: uppercase;
-  margin-block-start: 0;
-  margin-block-end: 0;
   opacity: 0.5;
   @media (max-width: ${tabletToMobile - 1}px) {
     font-size: 16px;
@@ -101,11 +95,7 @@ const Role = styled.h2`
   }
 `
 const Name = styled.h1`
-  font-weight: normal;
   text-transform: uppercase;
-  white-space: nowrap;
-  margin-block-start: 0;
-  margin-block-end: 0;
   @media (max-width: ${tabletToMobile - 1}px) {
     margin-top: 8px;
     font-size: 24px;
@@ -120,31 +110,16 @@ const Name = styled.h1`
   }
 `
 const Bio = styled.p`
-  font-family: Barlow;
-  font-weight: normal;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  color: #D0D6F9;
+  ${descriptionStyle}
   @media (max-width: ${tabletToMobile - 1}px) {
     margin-top: 16px;
-    font-size: 15px;
-    line-height: 25px;
-    /* or 167% */
-    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 16px;
-    font-size: 16px;
-    line-height: 28px;
-    /* or 175% */
-    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 15px;
     width: 444px;
-    font-size: 18px;
-    line-height: 32px;
-    /* or 178% */
   }
 `
 
@@ -375,7 +350,7 @@ const Crew: NextPage<Props> = ({ crew }) => {
           <TextBox>
             <Role>{crew.role}</Role>
             <Name>{crew.name}</Name>
-            <Bio>{crew.bio}</Bio>
+            <Bio className="font-body color-light-blue">{crew.bio}</Bio>
           </TextBox>
           <TabBox>
             <TabItem crewName="DouglasHurley" />

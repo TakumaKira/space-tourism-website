@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
+import { descriptionStyle } from '../../styles/sharedStyles';
 import { data } from '../api/data';
 import { DestinationData } from '../api/destinationData';
 
@@ -50,7 +51,7 @@ const Planet = styled.div`
   }
 `
 
-const TextBox = styled.div`
+const TabAndTextAndStat = styled.div`
   display: flex;
   flex-direction: column;
   @media (max-width: ${tabletToMobile - 1}px) {
@@ -71,8 +72,6 @@ const TextBox = styled.div`
 
 const TabBox = styled.ul`
   display: flex;
-  font-family: Barlow Condensed;
-  color: #D0D6F9;
   @media (max-width: ${tabletToMobile - 1}px) {
     height: 28px;
     & > *:not(:first-child) {
@@ -121,48 +120,41 @@ const A = styled.a`
   text-transform: uppercase;
 `
 
-const H1 = styled.h1`
-  font-weight: normal;
-  text-transform: uppercase;
-  margin-block-start: 0;
-  margin-block-end: 0;
+const TextBox = styled.div`
   @media (max-width: ${tabletToMobile - 1}px) {
     margin-top: 20px;
-    font-size: 56px;
+    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 32px;
-    font-size: 80px;
+    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 37px;
+  }
+`
+const H1 = styled.h1`
+  text-transform: uppercase;
+  @media (max-width: ${tabletToMobile - 1}px) {
+    font-size: 56px;
+  }
+  @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
+    font-size: 80px;
+  }
+  @media (min-width: ${desktopToTablet}px) {
     font-size: 100px;
   }
 `
-
 const Description = styled.p`
-  font-family: Barlow;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  color: #D0D6F9;
+  ${descriptionStyle}
   @media (max-width: ${tabletToMobile - 1}px) {
     margin-top: 1px;
-    font-size: 15px;
-    line-height: 25px;
-    /* or 167% */
-    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     margin-top: 8px;
-    font-size: 16px;
-    line-height: 28px;
-    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     margin-top: 14px;
-    font-size: 18px;
-    line-height: 32px;
-    /* or 178% */
   }
 `
 
@@ -221,7 +213,6 @@ const Stat = styled.div`
 `
 const StatLabel = styled.span`
   font-family: Barlow Condensed;
-  color: #D0D6F9;
   font-size: 14px;
   letter-spacing: 2.3625px;
 `
@@ -265,26 +256,28 @@ const Destination: NextPage<Props> = ({ destination }) => {
             layout="fill"
           />
         </Planet>
-        <TextBox>
-          <TabBox>
+        <TabAndTextAndStat>
+          <TabBox className="font-secondary color-light-blue">
             <TabItem destinationName="moon" />
             <TabItem destinationName="mars" />
             <TabItem destinationName="europa" />
             <TabItem destinationName="titan" />
           </TabBox>
-          <H1>{destination.name}</H1>
-          <Description>{destination.description}</Description>
+          <TextBox>
+            <H1>{destination.name}</H1>
+            <Description className="font-body color-light-blue">{destination.description}</Description>
+          </TextBox>
           <StatBox>
             <Stat>
-              <StatLabel>AVG. DISTANCE</StatLabel>
+              <StatLabel className="color-light-blue">AVG. DISTANCE</StatLabel>
               <StatInfo>{destination.distance}</StatInfo>
             </Stat>
             <Stat>
-              <StatLabel>EST. TRAVEL TIME</StatLabel>
+              <StatLabel className="color-light-blue">EST. TRAVEL TIME</StatLabel>
               <StatInfo>{destination.travel}</StatInfo>
             </Stat>
           </StatBox>
-        </TextBox>
+        </TabAndTextAndStat>
       </Contents>
     </>
   )

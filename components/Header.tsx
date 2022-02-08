@@ -10,8 +10,6 @@ const {
 } = config;
 
 const Container = styled.div`
-  font-family: Barlow Condensed;
-  color: #FFFFFF;
   @media (max-width: ${tabletToMobile - 1}px) {
     font-size: 16px;
     letter-spacing: 2.7px;
@@ -49,7 +47,7 @@ interface Props {
 }
 const Header: NextPage<Props> = ({num, text, className}) => {
   return (
-    <Container className={className}>
+    <Container className={`${className} font-secondary`}>
       <HeaderNum>{num}</HeaderNum>
       <HeaderText>{text}</HeaderText>
     </Container>
