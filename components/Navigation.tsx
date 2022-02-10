@@ -287,12 +287,12 @@ const Navigation: NextPage<Props> = (props: Props) => {
     style,
   } = props
 
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [sideMenuIsOpen, setSideMenuIsOpen] = React.useState(false)
   const router = useRouter()
   const path = router.pathname.split('/')[1]
 
   React.useEffect(() => {
-    setTimeout(() => setIsOpen(false), 1000)
+    setTimeout(() => setSideMenuIsOpen(false), 1000)
   }, [path])
 
   return (
@@ -306,8 +306,8 @@ const Navigation: NextPage<Props> = (props: Props) => {
       </Logo>
       <Line />
       <HiddenCheckbox
-        checked={isOpen}
-        onChange={e => setIsOpen(e.target.checked)}
+        checked={sideMenuIsOpen}
+        onChange={e => setSideMenuIsOpen(e.target.checked)}
       />
       <Hamburger>
         <Image
@@ -316,7 +316,7 @@ const Navigation: NextPage<Props> = (props: Props) => {
           layout="fill"
         />
       </Hamburger>
-      <BlurBox isOpen={isOpen}>
+      <BlurBox isOpen={sideMenuIsOpen}>
         <Close>
           <Image
             src="/shared/icon-close.svg"

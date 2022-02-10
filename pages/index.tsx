@@ -2,10 +2,12 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import styled from 'styled-components'
 import config from '../config.json'
+import { descriptionStyle } from '../styles/sharedStyles'
 
-const pre = 'SO, YOU WANT TO TRAVEL TO'
-const title = 'SPACE'
-const description = 'Let’s face it; if you want to go to space, you might as well genuinely go to outer space and not hover kind of on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!'
+export const TEXT_PRE = 'SO, YOU WANT TO TRAVEL TO'
+export const TEXT_TITLE = 'SPACE'
+export const TEXT_DESCRIPTION = 'Let’s face it; if you want to go to space, you might as well genuinely go to outer space and not hover kind of on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!'
+export const TEXT_LINK_TO_DESTINATION = 'EXPLORE'
 
 const {
   responsiveBreakPointWidth: {
@@ -20,12 +22,14 @@ const TextBox = styled.div`
     width: 327px;
     height: 276px;
     margin: 24px auto 0;
+    text-align: center;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     position: relative;
     width: 450px;
     height: 334px;
     margin: 106px auto 0;
+    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     position: absolute;
@@ -36,14 +40,7 @@ const TextBox = styled.div`
   }
 `
 const H2 = styled.h2`
-  margin-block-start: 0;
-  margin-block-end: 0;
-  white-space: nowrap;
   position: absolute;
-  font-family: Barlow Condensed;
-  font-style: normal;
-  font-weight: normal;
-  color: #D0D6F9;
   @media (max-width: ${tabletToMobile - 1}px) {
     height: 19px;
     left: 16.82%;
@@ -52,7 +49,6 @@ const H2 = styled.h2`
 
     font-size: 16px;
     line-height: 19px;
-    text-align: center;
     letter-spacing: 2.7px;
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
@@ -65,7 +61,6 @@ const H2 = styled.h2`
     line-height: 24px;
     /* identical to box height */
 
-    text-align: center;
     letter-spacing: 3.375px;
   }
   @media (min-width: ${desktopToTablet}px) {
@@ -82,13 +77,7 @@ const H2 = styled.h2`
   }
 `
 const H1 = styled.h1`
-  margin-block-start: 0;
-  margin-block-end: 0;
   position: absolute;
-  font-family: Bellefair;
-  font-style: normal;
-  font-weight: normal;
-  color: #FFFFFF;
   @media (max-width: ${tabletToMobile - 1}px) {
     height: 100px;
     left: 0%;
@@ -98,9 +87,6 @@ const H1 = styled.h1`
     font-size: 80px;
     line-height: 100px;
     /* identical to box height, or 125% */
-
-    text-align: center;
-
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 150px;
@@ -124,47 +110,25 @@ const H1 = styled.h1`
   }
 `
 const P = styled.p`
-  margin-block-start: 0;
-  margin-block-end: 0;
+  ${descriptionStyle}
   position: absolute;
-  font-family: Barlow;
-  font-style: normal;
-  font-weight: normal;
-  color: #D0D6F9;
   @media (max-width: ${tabletToMobile - 1}px) {
     height: 125px;
     left: 0%;
     right: 0%;
     top: calc(50% - 125px/2 + 75.5px);
-
-    font-size: 15px;
-    line-height: 25px;
-    /* or 167% */
-
-    text-align: center;
-
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     height: 112px;
     left: 0.67%;
     right: 0.67%;
     top: calc(50% - 112px/2 + 111px);
-
-    font-size: 16px;
-    line-height: 28px;
-    /* or 175% */
-
-    text-align: center;
   }
   @media (min-width: ${desktopToTablet}px) {
     height: 128px;
     left: 0.11%;
     right: 1.22%;
     top: calc(50% - 128px/2 + 127px);
-
-    font-size: 18px;
-    line-height: 32px;
-    /* or 178% */
   }
 `
 
@@ -212,10 +176,6 @@ const CircleTransparent = styled.div`
 `
 const CircleLabel = styled.span`
   position: absolute;
-  font-family: Bellefair;
-  font-style: normal;
-  font-weight: normal;
-  color: #0B0D17;
   pointer-events: none;
   @media (max-width: ${tabletToMobile - 1}px) {
     height: 23px;
@@ -256,21 +216,23 @@ const CircleLabel = styled.span`
   }
 `;
 
+export const MAIN_LINK = 'main-link'
+
 const Home: NextPage = () => {
   return (
     <>
       <TextBox>
-        <H2>{pre}</H2>
-        <H1>{title}</H1>
-        <P>{description}</P>
+        <H2 className="font-secondary color-light-blue">{TEXT_PRE}</H2>
+        <H1>{TEXT_TITLE}</H1>
+        <P className="font-body color-light-blue">{TEXT_DESCRIPTION}</P>
       </TextBox>
       <CircleContainer>
         <Circle />
         <Link href="/destination">
-          <CircleTransparent />
+          <CircleTransparent data-testid={MAIN_LINK} />
         </Link>
-        <CircleLabel>
-          EXPLORE
+        <CircleLabel className="color-black">
+          {TEXT_LINK_TO_DESTINATION}
         </CircleLabel>
       </CircleContainer>
     </>
