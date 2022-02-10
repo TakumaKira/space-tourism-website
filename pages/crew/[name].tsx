@@ -153,7 +153,7 @@ const TabItem: NextPage<TabItemProps> = ({crewName}) => {
   return (
     <li>
       <Link href={`/crew/${crewName}`} passHref>
-        <Tab selected={name === crewName} />
+        <Tab selected={name === crewName} data-testid={crewName} />
       </Link>
     </li>
   )

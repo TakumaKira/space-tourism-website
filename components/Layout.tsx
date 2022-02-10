@@ -66,7 +66,7 @@ const Layout: NextPage<Props> = ({children}) => {
   const path = router.pathname.split('/')[1]
 
   return (
-    <Background path={path}>
+    <Background path={path} data-testid="bg">
       <Navigation />
       <Main>{children}</Main>
     </Background>

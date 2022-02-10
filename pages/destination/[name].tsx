@@ -240,6 +240,8 @@ const TabItem: NextPage<TabItemProps> = ({destinationName}) => {
 
 export const DESTINATION_HEADER_NUM = '01'
 export const DESTINATION_HEADER_TEXT = 'PICK YOUR DESTINATION'
+export const DISTANCE_LABEL = 'AVG. DISTANCE'
+export const TRAVEL_LABEL = 'EST. TRAVEL TIME'
 
 interface Props {
   destination: DestinationData,
@@ -269,11 +271,11 @@ const Destination: NextPage<Props> = ({ destination }) => {
           </TextBox>
           <StatBox>
             <Stat>
-              <StatLabel className="color-light-blue">AVG. DISTANCE</StatLabel>
+              <StatLabel className="color-light-blue">{DISTANCE_LABEL}</StatLabel>
               <StatInfo>{destination.distance}</StatInfo>
             </Stat>
             <Stat>
-              <StatLabel className="color-light-blue">EST. TRAVEL TIME</StatLabel>
+              <StatLabel className="color-light-blue">{TRAVEL_LABEL}</StatLabel>
               <StatInfo>{destination.travel}</StatInfo>
             </Stat>
           </StatBox>

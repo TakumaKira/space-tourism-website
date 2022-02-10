@@ -80,7 +80,7 @@ const TabItem: NextPage<TabItemProps> = ({technologyName}) => {
   return (
     <li>
       <Link href={`/technology/${technologyName}`} passHref>
-        <Tab selected={name === technologyName} />
+        <Tab selected={name === technologyName} data-testid={technologyName} />
       </Link>
     </li>
   )
@@ -195,6 +195,7 @@ const TechImage = styled.div`
 
 export const TECHNOLOGY_HEADER_NUM = '03'
 export const TECHNOLOGY_HEADER_TEXT = 'SPACE LAUNCH 101'
+export const TERMINOLOGY = 'THE TERMINOLOGY…'
 
 interface Props {
   technology: TechnologyData,
@@ -223,7 +224,7 @@ const Technology: NextPage<Props> = ({ technology }) => {
             <TabItem technologyName="spaceCapsule" />
           </TabBox>
           <TextBox>
-            <Header className="font-secondary color-light-blue">THE TERMINOLOGY…</Header>
+            <Header className="font-secondary color-light-blue">{TERMINOLOGY}</Header>
             <Name>{technology.name}</Name>
             <Description className="font-body color-light-blue">{technology.description}</Description>
           </TextBox>

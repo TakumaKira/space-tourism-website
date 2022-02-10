@@ -4,9 +4,10 @@ import styled from 'styled-components'
 import config from '../config.json'
 import { descriptionStyle } from '../styles/sharedStyles'
 
-const pre = 'SO, YOU WANT TO TRAVEL TO'
-const title = 'SPACE'
-const description = 'Let’s face it; if you want to go to space, you might as well genuinely go to outer space and not hover kind of on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!'
+export const TEXT_PRE = 'SO, YOU WANT TO TRAVEL TO'
+export const TEXT_TITLE = 'SPACE'
+export const TEXT_DESCRIPTION = 'Let’s face it; if you want to go to space, you might as well genuinely go to outer space and not hover kind of on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!'
+export const TEXT_LINK_TO_DESTINATION = 'EXPLORE'
 
 const {
   responsiveBreakPointWidth: {
@@ -215,21 +216,23 @@ const CircleLabel = styled.span`
   }
 `;
 
+export const MAIN_LINK = 'main-link'
+
 const Home: NextPage = () => {
   return (
     <>
       <TextBox>
-        <H2 className="font-secondary color-light-blue">{pre}</H2>
-        <H1>{title}</H1>
-        <P className="font-body color-light-blue">{description}</P>
+        <H2 className="font-secondary color-light-blue">{TEXT_PRE}</H2>
+        <H1>{TEXT_TITLE}</H1>
+        <P className="font-body color-light-blue">{TEXT_DESCRIPTION}</P>
       </TextBox>
       <CircleContainer>
         <Circle />
         <Link href="/destination">
-          <CircleTransparent />
+          <CircleTransparent data-testid={MAIN_LINK} />
         </Link>
         <CircleLabel className="color-black">
-          EXPLORE
+          {TEXT_LINK_TO_DESTINATION}
         </CircleLabel>
       </CircleContainer>
     </>
