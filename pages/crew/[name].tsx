@@ -2,12 +2,12 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { descriptionStyle } from '../../styles/sharedStyles';
 import { CrewData } from '../api/crewData';
-import { data } from '../api/data';
 
 const {
   responsiveBreakPointWidth: {
@@ -59,7 +59,7 @@ const TextAndTab = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '536px'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     display: flex;
@@ -211,7 +211,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '539.51px'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     height: ${({crewName}) => {
@@ -225,7 +225,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '532px'
         default:
-          throw new Error(`Height of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     bottom: ${({crewName}) => {
@@ -239,7 +239,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '0px'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     left: ${({crewName}) => {
@@ -253,7 +253,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '19.75px'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
   }
@@ -270,7 +270,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '37.5px'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     margin-right: ${({crewName}) => {
@@ -284,7 +284,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return 'calc(89.43px - (1440px - 100%)/2)'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     width: ${({crewName}) => {
@@ -298,7 +298,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '615.57px'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     height: ${({crewName}) => {
@@ -312,7 +312,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '607px'
         default:
-          throw new Error(`Height of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
     bottom: ${({crewName}) => {
@@ -326,7 +326,7 @@ const CrewImage = styled.div<{crewName: string}>`
         case 'AnoushehAnsari':
           return '-1px'
         default:
-          throw new Error(`Width of crewName "${crewName}" is not defined`)
+          return '0px'
       }
     }};
   }
@@ -338,19 +338,28 @@ export const CREW_HEADER_TEXT = 'MEET YOUR CREW'
 interface Props {
   crew: CrewData,
 }
-const Crew: NextPage<Props> = ({ crew }) => {
+const Crew: NextPage<Props> = () => {
+  const [crewData, setCrewData] = React.useState<CrewData>()
   const router = useRouter()
   const { name } = router.query
+  React.useEffect(() => {
+    if (!name) return
+    fetch(`/api/crew/${name}`)
+      .then<CrewData>(res => res.json())
+      .then(data => {
+        setCrewData(data)
+      })
+  }, [name])
 
   return (
     <>
       <PositionedHeader num={CREW_HEADER_NUM} text={CREW_HEADER_TEXT} />
       <Contents>
-        <TextAndTab crewName={name as string}>
+        <TextAndTab crewName={typeof name === 'string' ? name : ''}>
           <TextBox>
-            <Role>{crew.role}</Role>
-            <Name>{crew.name}</Name>
-            <Bio className="font-body color-light-blue">{crew.bio}</Bio>
+            <Role>{crewData?.role}</Role>
+            <Name>{crewData?.name}</Name>
+            <Bio className="font-body color-light-blue">{crewData?.bio}</Bio>
           </TextBox>
           <TabBox>
             <TabItem crewName="DouglasHurley" />
@@ -359,30 +368,19 @@ const Crew: NextPage<Props> = ({ crew }) => {
             <TabItem crewName="AnoushehAnsari" />
           </TabBox>
         </TextAndTab>
-        <CrewImage crewName={name as string}>
-          <Image
-            src={crew.images.webp}
-            alt={crew.name}
-            layout="fill"
-            objectFit='contain'
-          />
+        <CrewImage crewName={typeof name === 'string' ? name : ''}>
+          {crewData?.images?.webp &&
+            <Image
+              src={crewData.images.webp}
+              alt={crewData?.name}
+              layout="fill"
+              objectFit='contain'
+            />
+          }
         </CrewImage>
       </Contents>
     </>
   )
-}
-
-export async function getStaticPaths() {
-  const crews = Object.values(data.crew) as CrewData[]
-  const paths = crews.map(crew => ({
-    params: { name: crew.name.replace(' ', '') },
-  }))
-  return { paths, fallback: false }
-}
-
-export async function getStaticProps({ params }: { params: { name: string } }) {
-  const crew = data.crew[params.name]
-  return { props: { crew } }
 }
 
 export default Crew

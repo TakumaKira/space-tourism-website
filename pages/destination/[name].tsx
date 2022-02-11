@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { descriptionStyle } from '../../styles/sharedStyles';
-import { data } from '../api/data';
 import { DestinationData } from '../api/destinationData';
 
 const {
@@ -246,17 +246,31 @@ export const TRAVEL_LABEL = 'EST. TRAVEL TIME'
 interface Props {
   destination: DestinationData,
 }
-const Destination: NextPage<Props> = ({ destination }) => {
+const Destination: NextPage<Props> = () => {
+  const [destinationData, setDestinationData] = React.useState<DestinationData>()
+  const router = useRouter()
+  const { name } = router.query
+  React.useEffect(() => {
+    if (!name) return
+    fetch(`/api/destination/${name}`)
+      .then<DestinationData>(res => res.json())
+      .then(data => {
+        setDestinationData(data)
+      })
+  }, [name])
+
   return (
     <>
       <PositionedHeader num={DESTINATION_HEADER_NUM} text={DESTINATION_HEADER_TEXT} />
       <Contents>
         <Planet>
-          <Image
-            src={destination.images.webp}
-            alt={destination.name}
-            layout="fill"
-          />
+          {destinationData?.images?.webp &&
+            <Image
+              src={destinationData.images.webp}
+              alt={destinationData?.name}
+              layout="fill"
+            />
+          }
         </Planet>
         <TabAndTextAndStat>
           <TabBox className="font-secondary color-light-blue">
@@ -266,48 +280,23 @@ const Destination: NextPage<Props> = ({ destination }) => {
             <TabItem destinationName="titan" />
           </TabBox>
           <TextBox>
-            <H1>{destination.name}</H1>
-            <Description className="font-body color-light-blue">{destination.description}</Description>
+            <H1>{destinationData?.name}</H1>
+            <Description className="font-body color-light-blue">{destinationData?.description}</Description>
           </TextBox>
           <StatBox>
             <Stat>
               <StatLabel className="color-light-blue">{DISTANCE_LABEL}</StatLabel>
-              <StatInfo>{destination.distance}</StatInfo>
+              <StatInfo>{destinationData?.distance}</StatInfo>
             </Stat>
             <Stat>
               <StatLabel className="color-light-blue">{TRAVEL_LABEL}</StatLabel>
-              <StatInfo>{destination.travel}</StatInfo>
+              <StatInfo>{destinationData?.travel}</StatInfo>
             </Stat>
           </StatBox>
         </TabAndTextAndStat>
       </Contents>
     </>
   )
-}
-
-// This function gets called at build time
-export async function getStaticPaths() {
-  // Call an external API endpoint to get destinations
-  const destinations = Object.values(data.destination) as DestinationData[]
-
-  // Get the paths we want to pre-render based on destinations
-  const paths = destinations.map(destination => ({
-    params: { name: destination.name.toLowerCase() },
-  }))
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
-}
-
-// This also gets called at build time
-export async function getStaticProps({ params }: { params: { name: string } }) {
-  // params contains the destination `name`.
-  // If the route is like /destination/moon, then params.name is moon
-  const destination = data.destination[params.name]
-
-  // Pass destination data to the page via props
-  return { props: { destination } }
 }
 
 export default Destination

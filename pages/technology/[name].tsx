@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { descriptionStyle } from '../../styles/sharedStyles';
-import { data } from '../api/data';
 import { TechnologyData } from '../api/technologyData';
 
 const {
@@ -200,7 +199,19 @@ export const TERMINOLOGY = 'THE TERMINOLOGY…'
 interface Props {
   technology: TechnologyData,
 }
-const Technology: NextPage<Props> = ({ technology }) => {
+const Technology: NextPage<Props> = () => {
+  const [technologyData, setTechnologyData] = React.useState<TechnologyData>()
+  const router = useRouter()
+  const { name } = router.query
+  React.useEffect(() => {
+    if (!name) return
+    fetch(`/api/technology/${name}`)
+      .then<TechnologyData>(res => res.json())
+      .then(data => {
+        setTechnologyData(data)
+      })
+  }, [name])
+
   const [isDesktop, setIsDesktop] = React.useState(false)
   React.useEffect(() => {
     const resizeHandler = () => {
@@ -212,6 +223,13 @@ const Technology: NextPage<Props> = ({ technology }) => {
     window.addEventListener("resize", resizeHandler)
     return () => window.removeEventListener("resize", resizeHandler)
   }, [])
+
+  const [imageSrc, setImageSrc] = React.useState<string>()
+  React.useEffect(() => {
+    const imageSrc = isDesktop ? technologyData?.images?.portrait : technologyData?.images?.landscape
+    if (!imageSrc) return
+    setImageSrc(imageSrc)
+  }, [isDesktop, technologyData?.images])
 
   return (
     <>
@@ -225,39 +243,23 @@ const Technology: NextPage<Props> = ({ technology }) => {
           </TabBox>
           <TextBox>
             <Header className="font-secondary color-light-blue">{TERMINOLOGY}</Header>
-            <Name>{technology.name}</Name>
-            <Description className="font-body color-light-blue">{technology.description}</Description>
+            <Name>{technologyData?.name}</Name>
+            <Description className="font-body color-light-blue">{technologyData?.description}</Description>
           </TextBox>
         </TabAndText>
         <TechImage>
-          <Image
-            src={isDesktop ? technology.images.portrait : technology.images.landscape}
-            alt={technology.name}
-            layout="fill"
-            objectFit="contain"
-          />
+          {imageSrc &&
+            <Image
+              src={imageSrc}
+              alt={technologyData?.name}
+              layout="fill"
+              objectFit="contain"
+            />
+          }
         </TechImage>
       </Contents>
     </>
   )
-}
-
-export async function getStaticPaths() {
-  const technologies = Object.values(data.technology) as TechnologyData[]
-  const paths = technologies.map(technology => ({
-    params: {
-      name: technology.name
-        .split(' ')
-        .map((word, index) => index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1))
-        .join('')
-    },
-  }))
-  return { paths, fallback: false }
-}
-
-export async function getStaticProps({ params }: { params: { name: string } }) {
-  const technology = data.technology[params.name]
-  return { props: { technology } }
 }
 
 export default Technology
