@@ -36,6 +36,7 @@ const destination: DestinationData = {
 }
 global.fetch = jest.fn(() =>
   Promise.resolve({
+    ok: true,
     json: () => Promise.resolve(destination),
   }),
 ) as jest.Mock;

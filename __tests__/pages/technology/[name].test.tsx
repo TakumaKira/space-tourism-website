@@ -31,6 +31,7 @@ const technology: TechnologyData = {
 }
 global.fetch = jest.fn(() =>
   Promise.resolve({
+    ok: true,
     json: () => Promise.resolve(technology),
   }),
 ) as jest.Mock;
