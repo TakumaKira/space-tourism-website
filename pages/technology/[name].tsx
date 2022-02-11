@@ -196,10 +196,7 @@ export const TECHNOLOGY_HEADER_NUM = '03'
 export const TECHNOLOGY_HEADER_TEXT = 'SPACE LAUNCH 101'
 export const TERMINOLOGY = 'THE TERMINOLOGY…'
 
-interface Props {
-  technology: TechnologyData,
-}
-const Technology: NextPage<Props> = () => {
+const Technology: NextPage = () => {
   const [technologyData, setTechnologyData] = React.useState<TechnologyData>()
   const router = useRouter()
   const { name } = router.query
@@ -207,9 +204,7 @@ const Technology: NextPage<Props> = () => {
     if (!name) return
     fetch(`/api/technology/${name}`)
       .then<TechnologyData>(res => res.json())
-      .then(data => {
-        setTechnologyData(data)
-      })
+      .then(setTechnologyData)
   }, [name])
 
   const [isDesktop, setIsDesktop] = React.useState(false)

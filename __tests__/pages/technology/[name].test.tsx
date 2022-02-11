@@ -2,23 +2,19 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import * as Image from 'next/image';
 import * as nextRouter from 'next/router';
 import { TechnologyData } from '../../../pages/api/technologyData';
-import Crew, { CREW_HEADER_NUM, CREW_HEADER_TEXT } from '../../../pages/crew/[name]';
 import Technology, { TECHNOLOGY_HEADER_NUM, TECHNOLOGY_HEADER_TEXT, TERMINOLOGY } from '../../../pages/technology/[name]';
 
-let mockImage: jest.SpyInstance<JSX.Element, [Image.ImageProps]>
-mockImage = jest.spyOn(Image, 'default')
-// eslint-disable-next-line @next/next/no-img-element
-mockImage.mockImplementation(({src, alt}) => <img src={src as string} alt={alt} />)
-
-let mockUseRouter: jest.SpyInstance<nextRouter.NextRouter, []>
-mockUseRouter = jest.spyOn(nextRouter, 'useRouter')
-let mockPush = jest.fn()
+const mockUseRouter: jest.SpyInstance<nextRouter.NextRouter, []> = jest.spyOn(nextRouter, 'useRouter')
+const mockPush = jest.fn()
+const mockPrefetch = jest.fn()
+mockPrefetch.mockResolvedValue({})
 mockUseRouter.mockReturnValue({
   route: '/',
   pathname: '/',
-  query: {},
+  query: { name: 'name' },
   asPath: '/',
   push: mockPush,
+  prefetch: mockPrefetch,
 } as unknown as nextRouter.NextRouter)
 
 const name = 'technology'
@@ -33,17 +29,27 @@ const technology: TechnologyData = {
   },
   description
 }
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(technology),
+  }),
+) as jest.Mock;
+
+let mockImage: jest.SpyInstance<JSX.Element, [Image.ImageProps]>
+mockImage = jest.spyOn(Image, 'default')
+// eslint-disable-next-line @next/next/no-img-element
+mockImage.mockImplementation(({src, alt}) => <img src={src as string} alt={alt} />)
 
 describe('Technology', () => {
-  test('renders main image and texts', () => {
-    render(<Technology technology={technology} />)
+  test('renders main image and texts', async() => {
+    render(<Technology />)
     const headerNumElem = screen.getByText(TECHNOLOGY_HEADER_NUM)
     expect(headerNumElem).toBeInTheDocument()
     const headerTextElem = screen.getByText(TECHNOLOGY_HEADER_TEXT)
     expect(headerTextElem).toBeInTheDocument()
     const terminologyElem = screen.getByText(TERMINOLOGY)
     expect(terminologyElem).toBeInTheDocument()
-    const nameElem = screen.getByText(name)
+    const nameElem = await screen.findByText(name) // Needs to wait for dom change caused by fetched technology data
     expect(nameElem).toBeInTheDocument()
     const descriptionElem = screen.getByText(description)
     expect(descriptionElem).toBeInTheDocument()
@@ -51,8 +57,9 @@ describe('Technology', () => {
     expect(image.src).toContain(landscape)
   })
 
-  test('renders links to other technologies', () => {
-    render(<Technology technology={technology} />)
+  test('renders links to other technologies', async() => {
+    render(<Technology />)
+    await screen.findByText(name) // Needs to wait for dom change caused by fetched technology data
 
     // launchVehicle link
     const launchVehicleLink = screen.getByTestId('launchVehicle')

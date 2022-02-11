@@ -322,10 +322,7 @@ const CrewImage = styled.div<{crewName: string}>`
 export const CREW_HEADER_NUM = '02'
 export const CREW_HEADER_TEXT = 'MEET YOUR CREW'
 
-interface Props {
-  crew: CrewData,
-}
-const Crew: NextPage<Props> = () => {
+const Crew: NextPage = () => {
   const [crewData, setCrewData] = React.useState<CrewData>()
   const router = useRouter()
   const { name } = router.query
