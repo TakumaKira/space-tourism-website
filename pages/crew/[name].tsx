@@ -37,6 +37,7 @@ const Contents = styled.div`
   @media (min-width: ${desktopToTablet}px) {
     height: 100%;
     overflow: hidden;
+    justify-content: space-between;
   }
 `
 
@@ -259,20 +260,6 @@ const CrewImage = styled.div<{crewName: string}>`
   }
   @media (min-width: ${desktopToTablet}px) {
     align-self: flex-end;
-    margin-left: ${({crewName}) => {
-      switch (crewName) {
-        case 'DouglasHurley':
-          return '81.43px'
-        case 'MarkShuttleworth':
-          return '20.5px'
-        case 'VictorGlover':
-          return '134px'
-        case 'AnoushehAnsari':
-          return '37.5px'
-        default:
-          return '0px'
-      }
-    }};
     margin-right: ${({crewName}) => {
       switch (crewName) {
         case 'DouglasHurley':
@@ -356,16 +343,16 @@ const Crew: NextPage<Props> = () => {
     setImageLoading(true)
   }, [crewData])
 
-  const [crewName, setCrewName] = React.useState('')
+  const [crewNameForCSS, setCrewNameForCSS] = React.useState('')
   React.useEffect(() => {
-    setTimeout(() => setCrewName(crewData?.name.replace(' ', '') || ''), 10)
+    setCrewNameForCSS(crewData?.name.replace(' ', '') || '')
   }, [crewData])
 
   return (
     <>
       <PositionedHeader num={CREW_HEADER_NUM} text={CREW_HEADER_TEXT} />
       <Contents>
-        <TextAndTab crewName={crewName}>
+        <TextAndTab crewName={crewNameForCSS}>
           <TextBox>
             <Role>{crewData?.role}</Role>
             <Name>{crewData?.name}</Name>
@@ -379,7 +366,7 @@ const Crew: NextPage<Props> = () => {
           </TabBox>
         </TextAndTab>
         <CrewImage
-          crewName={crewName}
+          crewName={crewNameForCSS}
           style={{opacity: `${imageLoading ? 0 : 1}`}}
         >
           {crewData?.images?.webp &&
