@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { descriptionStyle } from '../../styles/sharedStyles';
+import Custom404 from '../404';
 import { DestinationData } from '../api/destinationData';
 
 const {
@@ -244,14 +245,22 @@ export const DISTANCE_LABEL = 'AVG. DISTANCE'
 export const TRAVEL_LABEL = 'EST. TRAVEL TIME'
 
 const Destination: NextPage = () => {
-  const [destinationData, setDestinationData] = React.useState<DestinationData>()
   const router = useRouter()
   const { name } = router.query
+
+  const [destinationData, setDestinationData] = React.useState<DestinationData>()
+  const [notFound, setNotFound] = React.useState(false)
   React.useEffect(() => {
     if (!name) return
     fetch(`/api/destination/${name}`)
+      .then(res => {
+        if (res.ok) return res
+        throw new Error('Something wrong')
+      })
       .then<DestinationData>(res => res.json())
       .then(setDestinationData)
+      .then(() => setNotFound(false))
+      .catch(() => setNotFound(true))
   }, [name])
 
   const [imageLoading, setImageLoading] = React.useState(false)
@@ -260,43 +269,45 @@ const Destination: NextPage = () => {
   }, [destinationData])
 
   return (
-    <>
-      <PositionedHeader num={DESTINATION_HEADER_NUM} text={DESTINATION_HEADER_TEXT} />
-      <Contents>
-        <Planet style={{opacity: `${imageLoading ? 0 : 1}`}}>
-          {destinationData?.images?.webp &&
-            <Image
-              src={destinationData.images.webp}
-              alt={destinationData?.name}
-              layout="fill"
-              onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
-            />
-          }
-        </Planet>
-        <TabAndTextAndStat>
-          <TabBox className="font-secondary color-light-blue">
-            <TabItem destinationName="moon" />
-            <TabItem destinationName="mars" />
-            <TabItem destinationName="europa" />
-            <TabItem destinationName="titan" />
-          </TabBox>
-          <TextBox>
-            <H1>{destinationData?.name}</H1>
-            <Description className="font-body color-light-blue">{destinationData?.description}</Description>
-          </TextBox>
-          <StatBox>
-            <Stat>
-              <StatLabel className="color-light-blue">{DISTANCE_LABEL}</StatLabel>
-              <StatInfo>{destinationData?.distance}</StatInfo>
-            </Stat>
-            <Stat>
-              <StatLabel className="color-light-blue">{TRAVEL_LABEL}</StatLabel>
-              <StatInfo>{destinationData?.travel}</StatInfo>
-            </Stat>
-          </StatBox>
-        </TabAndTextAndStat>
-      </Contents>
-    </>
+    notFound
+      ? <Custom404 path="Destination" />
+      : <>
+        <PositionedHeader num={DESTINATION_HEADER_NUM} text={DESTINATION_HEADER_TEXT} />
+        <Contents>
+          <Planet style={{opacity: `${imageLoading ? 0 : 1}`}}>
+            {destinationData?.images?.webp &&
+              <Image
+                src={destinationData.images.webp}
+                alt={destinationData?.name}
+                layout="fill"
+                onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
+              />
+            }
+          </Planet>
+          <TabAndTextAndStat>
+            <TabBox className="font-secondary color-light-blue">
+              <TabItem destinationName="moon" />
+              <TabItem destinationName="mars" />
+              <TabItem destinationName="europa" />
+              <TabItem destinationName="titan" />
+            </TabBox>
+            <TextBox>
+              <H1>{destinationData?.name}</H1>
+              <Description className="font-body color-light-blue">{destinationData?.description}</Description>
+            </TextBox>
+            <StatBox>
+              <Stat>
+                <StatLabel className="color-light-blue">{DISTANCE_LABEL}</StatLabel>
+                <StatInfo>{destinationData?.distance}</StatInfo>
+              </Stat>
+              <Stat>
+                <StatLabel className="color-light-blue">{TRAVEL_LABEL}</StatLabel>
+                <StatInfo>{destinationData?.travel}</StatInfo>
+              </Stat>
+              </StatBox>
+          </TabAndTextAndStat>
+        </Contents>
+      </>
   )
 }
 

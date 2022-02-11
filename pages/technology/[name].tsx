@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { descriptionStyle } from '../../styles/sharedStyles';
+import Custom404 from '../404';
 import { TechnologyData } from '../api/technologyData';
 
 const {
@@ -197,14 +198,22 @@ export const TECHNOLOGY_HEADER_TEXT = 'SPACE LAUNCH 101'
 export const TERMINOLOGY = 'THE TERMINOLOGY…'
 
 const Technology: NextPage = () => {
-  const [technologyData, setTechnologyData] = React.useState<TechnologyData>()
   const router = useRouter()
   const { name } = router.query
+
+  const [technologyData, setTechnologyData] = React.useState<TechnologyData>()
+  const [notFound, setNotFound] = React.useState(false)
   React.useEffect(() => {
     if (!name) return
     fetch(`/api/technology/${name}`)
+      .then(res => {
+        if (res.ok) return res
+        throw new Error('Something wrong')
+      })
       .then<TechnologyData>(res => res.json())
       .then(setTechnologyData)
+      .then(() => setNotFound(false))
+      .catch(() => setNotFound(true))
   }, [name])
 
   const [isDesktop, setIsDesktop] = React.useState(false)
@@ -231,36 +240,38 @@ const Technology: NextPage = () => {
   }, [isDesktop, technologyData])
 
   return (
-    <>
-      <PositionedHeader num={TECHNOLOGY_HEADER_NUM} text={TECHNOLOGY_HEADER_TEXT} />
-      <Contents>
-        <TabAndText>
-          <TabBox>
-            <TabItem technologyName="launchVehicle" />
-            <TabItem technologyName="spaceport" />
-            <TabItem technologyName="spaceCapsule" />
-          </TabBox>
-          <TextBox>
-            <Header className="font-secondary color-light-blue">{TERMINOLOGY}</Header>
-            <Name>{technologyData?.name}</Name>
-            <Description className="font-body color-light-blue">{technologyData?.description}</Description>
-          </TextBox>
-        </TabAndText>
-        <TechImage
-          style={{opacity: `${imageLoading ? 0 : 1}`}}
-        >
-          {imageSrc &&
-            <Image
-              src={imageSrc}
-              alt={technologyData?.name}
-              layout="fill"
-              objectFit="contain"
-              onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
-            />
-          }
-        </TechImage>
-      </Contents>
-    </>
+    notFound
+      ? <Custom404 path="Technology" />
+      : <>
+        <PositionedHeader num={TECHNOLOGY_HEADER_NUM} text={TECHNOLOGY_HEADER_TEXT} />
+        <Contents>
+          <TabAndText>
+            <TabBox>
+              <TabItem technologyName="launchVehicle" />
+              <TabItem technologyName="spaceport" />
+              <TabItem technologyName="spaceCapsule" />
+            </TabBox>
+            <TextBox>
+              <Header className="font-secondary color-light-blue">{TERMINOLOGY}</Header>
+              <Name>{technologyData?.name}</Name>
+              <Description className="font-body color-light-blue">{technologyData?.description}</Description>
+            </TextBox>
+          </TabAndText>
+          <TechImage
+            style={{opacity: `${imageLoading ? 0 : 1}`}}
+          >
+            {imageSrc &&
+              <Image
+                src={imageSrc}
+                alt={technologyData?.name}
+                layout="fill"
+                objectFit="contain"
+                onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
+              />
+            }
+          </TechImage>
+        </Contents>
+      </>
   )
 }
 

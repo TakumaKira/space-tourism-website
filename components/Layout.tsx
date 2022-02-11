@@ -32,19 +32,28 @@ export const Background = styled.div<{path: string}>`
       return '667px'
     }};
     background-image: ${({path}) => {
-      return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_MOBILE`]})`
+      if (path.toUpperCase() === 'DESTINATION' || path.toUpperCase() === 'CREW' || path.toUpperCase() === 'TECHNOLOGY') {
+        return `url(${resourcePath[`${path.toUpperCase()}_BACKGROUND_MOBILE`]})`
+      }
+      return `url(${resourcePath.HOME_BACKGROUND_MOBILE})`
     }};
   }
   @media (min-width: ${tabletToMobile}px) and (max-width: ${desktopToTablet - 1}px) {
     min-height: 1024px;
     background-image: ${({path}) => {
-      return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_TABLET`]})`
+      if (path.toUpperCase() === 'DESTINATION' || path.toUpperCase() === 'CREW' || path.toUpperCase() === 'TECHNOLOGY') {
+        return `url(${resourcePath[`${path.toUpperCase()}_BACKGROUND_TABLET`]})`
+      }
+      return `url(${resourcePath.HOME_BACKGROUND_TABLET})`
     }};
   }
   @media (min-width: ${desktopToTablet}px) {
     min-height: 900px;
     background-image: ${({path}) => {
-      return `url(${resourcePath[`${path.toUpperCase() || 'HOME'}_BACKGROUND_DESKTOP`]})`
+      if (path.toUpperCase() === 'DESTINATION' || path.toUpperCase() === 'CREW' || path.toUpperCase() === 'TECHNOLOGY') {
+        return `url(${resourcePath[`${path.toUpperCase()}_BACKGROUND_DESKTOP`]})`
+      }
+      return `url(${resourcePath.HOME_BACKGROUND_DESKTOP})`
     }};
   }
   background-repeat: no-repeat;
