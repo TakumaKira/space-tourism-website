@@ -11,13 +11,16 @@ mockImage.mockImplementation(({src, alt}) => <img src={src as string} alt={alt} 
 
 let mockUseRouter: jest.SpyInstance<nextRouter.NextRouter, []>
 mockUseRouter = jest.spyOn(nextRouter, 'useRouter')
-let mockPush = jest.fn()
+const mockPush = jest.fn()
+const mockPrefetch = jest.fn()
+mockPrefetch.mockResolvedValue({})
 mockUseRouter.mockReturnValue({
   route: '/',
   pathname: '/',
-  query: { name: 'DouglasHurley' },
+  query: { name: 'name' },
   asPath: '/',
   push: mockPush,
+  prefetch: mockPrefetch,
 } as unknown as nextRouter.NextRouter)
 
 const name = 'crew'
@@ -34,15 +37,20 @@ const crew: CrewData = {
   role,
   bio
 }
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(crew),
+  }),
+) as jest.Mock;
 
 describe('Crew', () => {
-  test('renders main image and texts', () => {
-    render(<Crew crew={crew} />)
+  test('renders main image and texts', async() => {
+    render(<Crew />)
     const headerNumElem = screen.getByText(CREW_HEADER_NUM)
     expect(headerNumElem).toBeInTheDocument()
     const headerTextElem = screen.getByText(CREW_HEADER_TEXT)
     expect(headerTextElem).toBeInTheDocument()
-    const roleElem = screen.getByText(role)
+    const roleElem = await screen.findByText(role) // Needs to wait for dom change caused by fetched technology data
     expect(roleElem).toBeInTheDocument()
     const nameElem = screen.getByText(name)
     expect(nameElem).toBeInTheDocument()
@@ -52,8 +60,9 @@ describe('Crew', () => {
     expect(image.src).toContain(webp)
   })
 
-  test('renders links to other crews', () => {
-    render(<Crew crew={crew} />)
+  test('renders links to other crews', async() => {
+    render(<Crew />)
+    await screen.findByText(role) // Needs to wait for dom change caused by fetched technology data
 
     // DouglasHurleyLink link
     const DouglasHurleyLink = screen.getByTestId('DouglasHurley')

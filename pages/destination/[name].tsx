@@ -243,10 +243,7 @@ export const DESTINATION_HEADER_TEXT = 'PICK YOUR DESTINATION'
 export const DISTANCE_LABEL = 'AVG. DISTANCE'
 export const TRAVEL_LABEL = 'EST. TRAVEL TIME'
 
-interface Props {
-  destination: DestinationData,
-}
-const Destination: NextPage<Props> = () => {
+const Destination: NextPage = () => {
   const [destinationData, setDestinationData] = React.useState<DestinationData>()
   const router = useRouter()
   const { name } = router.query
@@ -254,9 +251,7 @@ const Destination: NextPage<Props> = () => {
     if (!name) return
     fetch(`/api/destination/${name}`)
       .then<DestinationData>(res => res.json())
-      .then(data => {
-        setDestinationData(data)
-      })
+      .then(setDestinationData)
   }, [name])
 
   const [imageLoading, setImageLoading] = React.useState(false)

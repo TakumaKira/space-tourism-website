@@ -4,20 +4,18 @@ import * as nextRouter from 'next/router';
 import { DestinationData } from '../../../pages/api/destinationData';
 import Destination, { DESTINATION_HEADER_NUM, DESTINATION_HEADER_TEXT, DISTANCE_LABEL, TRAVEL_LABEL } from '../../../pages/destination/[name]';
 
-let mockImage: jest.SpyInstance<JSX.Element, [Image.ImageProps]>
-mockImage = jest.spyOn(Image, 'default')
-// eslint-disable-next-line @next/next/no-img-element
-mockImage.mockImplementation(({src, alt}) => <img src={src as string} alt={alt} />)
-
 let mockUseRouter: jest.SpyInstance<nextRouter.NextRouter, []>
 mockUseRouter = jest.spyOn(nextRouter, 'useRouter')
-let mockPush = jest.fn()
+const mockPush = jest.fn()
+const mockPrefetch = jest.fn()
+mockPrefetch.mockResolvedValue({})
 mockUseRouter.mockReturnValue({
   route: '/',
   pathname: '/',
-  query: {},
+  query: { name: 'name' },
   asPath: '/',
   push: mockPush,
+  prefetch: mockPrefetch,
 } as unknown as nextRouter.NextRouter)
 
 const name = 'planet'
@@ -36,15 +34,25 @@ const destination: DestinationData = {
   distance,
   travel
 }
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(destination),
+  }),
+) as jest.Mock;
+
+let mockImage: jest.SpyInstance<JSX.Element, [Image.ImageProps]>
+mockImage = jest.spyOn(Image, 'default')
+// eslint-disable-next-line @next/next/no-img-element
+mockImage.mockImplementation(({src, alt}) => <img src={src as string} alt={alt} />)
 
 describe('Destination', () => {
-  test('renders main image and texts', () => {
-    render(<Destination destination={destination} />)
+  test('renders main image and texts', async() => {
+    render(<Destination />)
     const headerNumElem = screen.getByText(DESTINATION_HEADER_NUM)
     expect(headerNumElem).toBeInTheDocument()
     const headerTextElem = screen.getByText(DESTINATION_HEADER_TEXT)
     expect(headerTextElem).toBeInTheDocument()
-    const image = screen.getByRole('img') as HTMLImageElement
+    const image = await screen.findByRole('img') as HTMLImageElement // Needs to wait for dom change caused by fetched technology data
     expect(image.src).toContain(webp)
     const nameElem = screen.getByText(name)
     expect(nameElem).toBeInTheDocument()
@@ -60,8 +68,9 @@ describe('Destination', () => {
     expect(travelElem).toBeInTheDocument()
   })
 
-  test('renders links to other destinations', () => {
-    render(<Destination destination={destination} />)
+  test('renders links to other destinations', async() => {
+    render(<Destination />)
+    await screen.findByRole('img') // Needs to wait for dom change caused by fetched technology data
 
     // moon link
     const moonLink = screen.getByText('moon')
