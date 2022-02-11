@@ -351,11 +351,21 @@ const Crew: NextPage<Props> = () => {
       })
   }, [name])
 
+  const [imageLoading, setImageLoading] = React.useState(false)
+  React.useEffect(() => {
+    setImageLoading(true)
+  }, [crewData])
+
+  const [crewName, setCrewName] = React.useState('')
+  React.useEffect(() => {
+    setTimeout(() => setCrewName(crewData?.name.replace(' ', '') || ''), 10)
+  }, [crewData])
+
   return (
     <>
       <PositionedHeader num={CREW_HEADER_NUM} text={CREW_HEADER_TEXT} />
       <Contents>
-        <TextAndTab crewName={typeof name === 'string' ? name : ''}>
+        <TextAndTab crewName={crewName}>
           <TextBox>
             <Role>{crewData?.role}</Role>
             <Name>{crewData?.name}</Name>
@@ -368,13 +378,17 @@ const Crew: NextPage<Props> = () => {
             <TabItem crewName="AnoushehAnsari" />
           </TabBox>
         </TextAndTab>
-        <CrewImage crewName={typeof name === 'string' ? name : ''}>
+        <CrewImage
+          crewName={crewName}
+          style={{opacity: `${imageLoading ? 0 : 1}`}}
+        >
           {crewData?.images?.webp &&
             <Image
               src={crewData.images.webp}
               alt={crewData?.name}
               layout="fill"
               objectFit='contain'
+              onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
             />
           }
         </CrewImage>

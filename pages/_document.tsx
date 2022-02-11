@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html style={{backgroundColor: '#0b0d18'}}>
         <Head>
           <link
             rel="preconnect"

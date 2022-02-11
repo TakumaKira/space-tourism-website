@@ -259,16 +259,22 @@ const Destination: NextPage<Props> = () => {
       })
   }, [name])
 
+  const [imageLoading, setImageLoading] = React.useState(false)
+  React.useEffect(() => {
+    setImageLoading(true)
+  }, [destinationData])
+
   return (
     <>
       <PositionedHeader num={DESTINATION_HEADER_NUM} text={DESTINATION_HEADER_TEXT} />
       <Contents>
-        <Planet>
+        <Planet style={{opacity: `${imageLoading ? 0 : 1}`}}>
           {destinationData?.images?.webp &&
             <Image
               src={destinationData.images.webp}
               alt={destinationData?.name}
               layout="fill"
+              onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
             />
           }
         </Planet>
