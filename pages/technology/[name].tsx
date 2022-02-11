@@ -227,9 +227,13 @@ const Technology: NextPage<Props> = () => {
   const [imageSrc, setImageSrc] = React.useState<string>()
   React.useEffect(() => {
     const imageSrc = isDesktop ? technologyData?.images?.portrait : technologyData?.images?.landscape
-    if (!imageSrc) return
     setImageSrc(imageSrc)
-  }, [isDesktop, technologyData?.images])
+  }, [isDesktop, technologyData])
+
+  const [imageLoading, setImageLoading] = React.useState(true)
+  React.useEffect(() => {
+    setImageLoading(true)
+  }, [isDesktop, technologyData])
 
   return (
     <>
@@ -247,13 +251,16 @@ const Technology: NextPage<Props> = () => {
             <Description className="font-body color-light-blue">{technologyData?.description}</Description>
           </TextBox>
         </TabAndText>
-        <TechImage>
+        <TechImage
+          style={{opacity: `${imageLoading ? 0 : 1}`}}
+        >
           {imageSrc &&
             <Image
               src={imageSrc}
               alt={technologyData?.name}
               layout="fill"
               objectFit="contain"
+              onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
             />
           }
         </TechImage>
