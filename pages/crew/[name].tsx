@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { PositionedHeader } from '../../components/Header';
 import config from '../../config.json';
 import { descriptionStyle } from '../../styles/sharedStyles';
+import Custom404 from '../404';
 import { CrewData } from '../api/crewData';
 
 const {
@@ -323,16 +324,22 @@ export const CREW_HEADER_NUM = '02'
 export const CREW_HEADER_TEXT = 'MEET YOUR CREW'
 
 const Crew: NextPage = () => {
-  const [crewData, setCrewData] = React.useState<CrewData>()
   const router = useRouter()
   const { name } = router.query
+
+  const [crewData, setCrewData] = React.useState<CrewData>()
+  const [notFound, setNotFound] = React.useState(false)
   React.useEffect(() => {
     if (!name) return
     fetch(`/api/crew/${name}`)
-      .then<CrewData>(res => res.json())
-      .then(data => {
-        setCrewData(data)
+      .then(res => {
+        if (res.ok) return res
+        throw new Error('Something wrong')
       })
+      .then<CrewData>(res => res.json())
+      .then(setCrewData)
+      .then(() => setNotFound(false))
+      .catch(() => setNotFound(true))
   }, [name])
 
   const [imageLoading, setImageLoading] = React.useState(false)
@@ -346,38 +353,40 @@ const Crew: NextPage = () => {
   }, [crewData])
 
   return (
-    <>
-      <PositionedHeader num={CREW_HEADER_NUM} text={CREW_HEADER_TEXT} />
-      <Contents>
-        <TextAndTab crewName={crewNameForCSS}>
-          <TextBox>
-            <Role>{crewData?.role}</Role>
-            <Name>{crewData?.name}</Name>
-            <Bio className="font-body color-light-blue">{crewData?.bio}</Bio>
-          </TextBox>
-          <TabBox>
-            <TabItem crewName="DouglasHurley" />
-            <TabItem crewName="MarkShuttleworth" />
-            <TabItem crewName="VictorGlover" />
-            <TabItem crewName="AnoushehAnsari" />
-          </TabBox>
-        </TextAndTab>
-        <CrewImage
-          crewName={crewNameForCSS}
-          style={{opacity: `${imageLoading ? 0 : 1}`}}
-        >
-          {crewData?.images?.webp &&
-            <Image
-              src={crewData.images.webp}
-              alt={crewData?.name}
-              layout="fill"
-              objectFit='contain'
-              onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
-            />
-          }
-        </CrewImage>
-      </Contents>
-    </>
+    notFound
+      ? <Custom404 path="Crew" />
+      : <>
+        <PositionedHeader num={CREW_HEADER_NUM} text={CREW_HEADER_TEXT} />
+        <Contents>
+          <TextAndTab crewName={crewNameForCSS}>
+            <TextBox>
+              <Role>{crewData?.role}</Role>
+              <Name>{crewData?.name}</Name>
+              <Bio className="font-body color-light-blue">{crewData?.bio}</Bio>
+            </TextBox>
+            <TabBox>
+              <TabItem crewName="DouglasHurley" />
+              <TabItem crewName="MarkShuttleworth" />
+              <TabItem crewName="VictorGlover" />
+              <TabItem crewName="AnoushehAnsari" />
+            </TabBox>
+          </TextAndTab>
+          <CrewImage
+            crewName={crewNameForCSS}
+            style={{opacity: `${imageLoading ? 0 : 1}`}}
+          >
+            {crewData?.images?.webp &&
+              <Image
+                src={crewData.images.webp}
+                alt={crewData?.name}
+                layout="fill"
+                objectFit='contain'
+                onLoadingComplete={size => size.naturalHeight && setImageLoading(false)}
+              />
+            }
+          </CrewImage>
+        </Contents>
+      </>
   )
 }
 

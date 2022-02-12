@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./preview.jpg) <!-- TODO: Update this to my "./screenshot.jpg" after finishing this project -->
+![](./preview.png)
 
 ### Links
 
@@ -58,12 +58,19 @@ Users should be able to:
 
 ### What I learned
 
+- How to build multi-page website with Next.js, Storybook and Styled Components, testing with Jest and Cypress.
+- I found out Next.js is still not well developed especially around mocking some modules with Jest. Maybe I can contribute?
+
 ### Continued development
+
+- I still need to learn more about Server side rendering.
 
 ### Useful resources
 
 - [Unit testing Next.js API routes](https://seanconnolly.dev/unit-testing-nextjs-api-routes) - This told me the easiest way to test Next.js API.
 - [What are the best screen sizes for responsive web design in 2022?](https://www.hobo-web.co.uk/best-screen-size/) - Referencing this page, I set responsive break point width.
+- [idiomatic way to share styles in styled-components?](https://stackoverflow.com/questions/49618997/idiomatic-way-to-share-styles-in-styled-components) - This told me the ways to share styles in styled-components.
+- [How TO - Aspect Ratio](https://www.w3schools.com/howto/howto_css_aspect_ratio.asp) - I needed to maintain the aspect ratio of image container div.
 
 ## Author
 

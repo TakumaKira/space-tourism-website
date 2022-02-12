@@ -39,6 +39,7 @@ const crew: CrewData = {
 }
 global.fetch = jest.fn(() =>
   Promise.resolve({
+    ok: true,
     json: () => Promise.resolve(crew),
   }),
 ) as jest.Mock;
