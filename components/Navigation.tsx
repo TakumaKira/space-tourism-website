@@ -118,7 +118,7 @@ const BlurBox = styled.div<{isOpen: boolean}>`
     overflow: hidden;
     top: 0;
     right: 0;
-    width: ${props => props.isOpen ? 254 : 0}px;
+    width: ${props => props.isOpen ? 254 : 0.1}px;
     transition: width 0.4s;
     z-index: 1;
   }
